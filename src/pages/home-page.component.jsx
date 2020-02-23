@@ -12,6 +12,10 @@ import Home from "@material-ui/icons/Home";
 import Icon from "@material-ui/core/Icon";
 
 import avatar from "../assets/pictures/mirna_i_antonio.jpg";
+import background from "../assets/pictures/backround.jpg";
+
+import { withRouter } from 'react-router-dom';
+
 
 import {
     cardTitle,
@@ -72,12 +76,19 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-const HomePage = () => {
+const HomePage = ({ history }) => {
 
     const classes = useStyles();
 
     return (
-        <div className='home-page'>
+        <div className='home-page'
+            style={{
+                backgroundImage: `url(${background})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+                height: 800
+            }}>
             <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                     <GridContainer>
@@ -91,14 +102,16 @@ const HomePage = () => {
                                     </h3>
                                     <CardAvatar >
                                         <a href="#pablo" onClick={e => e.preventDefault()}>
-                                            <img src={avatar} alt="..." style={{height:200} } />
+                                            <img src={avatar} alt="..." style={{ height: 200 }} />
                                         </a>
                                     </CardAvatar>
 
                                     <p className={classes.cardDescription}>
                                         Manage your wedding.
                                     </p>
-                                    <Button round color="rose">
+                                    <Button round color="rose"
+                                        onClick={()=>{
+                                            history.push('/wedding-page')}}>
                                         HOME
                                     </Button>
                                 </CardBody>
@@ -114,4 +127,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default withRouter(HomePage);
