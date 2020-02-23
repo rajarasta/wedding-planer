@@ -111,7 +111,7 @@ const HomePage = ({ history }) => {
                                     </p>
                                     <Button round color="rose"
                                         onClick={()=>{
-                                            history.push('/wedding-page')}}>
+                                            history.push('/dashboard')}}>
                                         HOME
                                     </Button>
                                 </CardBody>
