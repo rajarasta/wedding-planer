@@ -164,6 +164,121 @@ export default function ValidationForms() {
   const classes = useStyles();
   return (
     <GridContainer>
+    <GridItem xs={12} sm={12} md={6}>
+        <Card>
+          <CardHeader color="rose" icon>
+            <CardIcon color="rose">
+              <MailOutline />
+            </CardIcon>
+            <h4 className={classes.cardIconTitle}>Register Forms</h4>
+          </CardHeader>
+          <CardBody>
+            <form>
+              <CustomInput
+                success={registerEmailState === "success"}
+                error={registerEmailState === "error"}
+                labelText="Email Address *"
+                id="registeremail"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event => {
+                    if (verifyEmail(event.target.value)) {
+                      setregisterEmailState("success");
+                    } else {
+                      setregisterEmailState("error");
+                    }
+                    setregisterEmail(event.target.value);
+                  },
+                  type: "email"
+                }}
+              />
+              <CustomInput
+                success={registerPasswordState === "success"}
+                error={registerPasswordState === "error"}
+                labelText="Password *"
+                id="registerpassword"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event => {
+                    if (verifyLength(event.target.value, 1)) {
+                      setregisterPasswordState("success");
+                    } else {
+                      setregisterPasswordState("error");
+                    }
+                    setregisterPassword(event.target.value);
+                  },
+                  type: "password",
+                  autoComplete: "off"
+                }}
+              />
+              <CustomInput
+                success={registerConfirmPasswordState === "success"}
+                error={registerConfirmPasswordState === "error"}
+                labelText="Confirm Password *"
+                id="registerconfirmpassword"
+                formControlProps={{
+                  fullWidth: true
+                }}
+                inputProps={{
+                  onChange: event => {
+                    if (registerPassword === event.target.value) {
+                      setregisterConfirmPasswordState("success");
+                    } else {
+                      setregisterConfirmPasswordState("error");
+                    }
+                    setregisterConfirmPassword(event.target.value);
+                  },
+                  type: "password",
+                  autoComplete: "off"
+                }}
+              />
+              <div className={classes.formCategory}>
+                <small>*</small> Required fields
+              </div>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    tabIndex={-1}
+                    onClick={event => {
+                      if (event.target.checked) {
+                        setregisterCheckboxState("success");
+                      } else {
+                        setregisterCheckboxState("error");
+                      }
+                      setregisterCheckbox(event.target.checked);
+                    }}
+                    checkedIcon={<Check className={classes.checkedIcon} />}
+                    icon={<Check className={classes.uncheckedIcon} />}
+                    classes={{
+                      checked: classes.checked,
+                      root: classes.checkRoot
+                    }}
+                  />
+                }
+                classes={{
+                  label:
+                    classes.label +
+                    (registerCheckboxState === "error"
+                      ? " " + classes.labelError
+                      : "")
+                }}
+                label="Subscribe to newsletter"
+              />
+              <Button
+                color="rose"
+                onClick={registerClick}
+                className={classes.registerButton}
+              >
+                Register
+              </Button>
+            </form>
+          </CardBody>
+        </Card>
+      </GridItem>
       
       
       <GridItem xs={12} sm={12} md={12}>
