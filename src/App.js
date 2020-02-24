@@ -6,6 +6,8 @@ import HomePage from './pages/home-page.component';
 import WeddingPage from "./pages/wedding-page/wedding-page.component";
 import LoginPage from "./pages/login-page/login-page.component";
 import Dashboard from "./pages/dashboard-page/dashboard.component";
+import Guests from './pages/guests/guests.components';
+import AddGuestPage from './pages/add-guest-page/add-guest-page.components'
 
 
 //React Router for page navigation imports
@@ -24,6 +26,8 @@ class App extends React.Component {
           <Route path='/wedding-page' component={WeddingPage} />
           <Route path='/login-page' component={LoginPage} />
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/guests' component={Guests} />
+          <Route path='/add-guest-page' component={AddGuestPage} />
         </Switch>
       </div>
     );

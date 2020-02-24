@@ -9,7 +9,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 // import InfoOutline from "@material-ui/icons/InfoOutline";
 import Refresh from "@material-ui/icons/Refresh";
 import Edit from "@material-ui/icons/Edit";
-import Place from "@material-ui/icons/Place";
 import ArtTrack from "@material-ui/icons/ArtTrack";
 
 // core components
@@ -31,7 +30,7 @@ import { withRouter } from 'react-router-dom';
 
 const useStyles = makeStyles(styles);
 
-function Dashboard() {
+function Dashboard({history}) {
   const classes = useStyles();
   return (
     <div>
@@ -41,7 +40,7 @@ function Dashboard() {
         <GridItem xs={12} sm={12} md={4}>
           <Card product className={classes.cardHover}>
             <CardHeader image className={classes.cardHeaderHover}>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
+              <a href="#pablo" onClick={()=>{history.push('guests')}}>
                 <img src={weddingTable} alt="..." />
               </a>
             </CardHeader>
