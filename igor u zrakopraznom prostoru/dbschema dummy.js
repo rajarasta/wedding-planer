@@ -1,6 +1,6 @@
 guests = [
   {
-    guestId: "h3423kfajs34k2n4asd", // string
+    guestId: "h3423kfajs34k2n4asd", // string 
     slug: "domagoj-siljeg", // string
     firstName: "Domagoj", // string
     lastName: "Siljeg", // string
