@@ -137,7 +137,7 @@ function Dashboard({history}) {
                 </a>
               </h4>
               <p className={classes.cardProductDesciprion}>
-              {/*TODO location top level description*/ }
+              {/*TODO: location top level description*/ }
                 ###Locations top level description
               </p>
             </CardBody>

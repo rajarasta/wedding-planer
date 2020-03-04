@@ -105,6 +105,7 @@ export default function ValidationForms() {
     //Handles accomodation selection
     const handleSimple = event => {
         setSimpleSelect(event.target.value);
+        console.log(event.target.value)
       };
     // verifies if value is a valid URL
     const verifyUrl = value => {
@@ -115,7 +116,8 @@ export default function ValidationForms() {
             return false;
         }
     };
-    const registerClick = () => {
+    const registerClick = (event) => {
+        event.preventDefault()
         if (registerEmailState === "") {
             setregisterEmailState("error");
         }
@@ -127,10 +129,11 @@ export default function ValidationForms() {
         }
         if (registerCheckboxState === "") {
             setregisterCheckboxState("error");
-        }
-        if (requiredPhoneState === "") {
-            setrequiredState("error");
         };
+
+        //TODO: ode napravit sve sto treba odadit da upise novoga na firebase
+        console.log(event.target.elements.username.value)
+
     };
     const loginClick = () => {
         if (loginEmailState === "") {
@@ -186,10 +189,11 @@ export default function ValidationForms() {
                         <h4 className={classes.cardIconTitle}>Register Forms</h4>
                     </CardHeader>
                     <CardBody>
-                        <form>
+                        <form onSubmit={registerClick}>
                             <CustomInput
                                 labelText="First Name"
-                                id="firstName"
+                                id="username"
+                                name='username'
                                 formControlProps={{
                                     fullWidth: true
                                 }}
@@ -239,7 +243,7 @@ export default function ValidationForms() {
 
                             <CustomInput
                                 labelText="Additional Adults"
-                                id="firstName"
+                                id="additionalAdults"
                                 formControlProps={{
                                     fullWidth: true
                                 }}
@@ -249,7 +253,7 @@ export default function ValidationForms() {
                             />
                             <CustomInput
                                 labelText="Additional Children"
-                                id="lastName"
+                                id="additionalChildren"
                                 formControlProps={{
                                     fullWidth: true
                                 }}
@@ -270,6 +274,7 @@ export default function ValidationForms() {
                                         Accomodation
                         </InputLabel>
                                     <Select
+                                        // {TODO: Accomodation must be drawn from database }
                                         MenuProps={{
                                             className: classes.selectMenu
                                         }}
@@ -355,7 +360,7 @@ export default function ValidationForms() {
                             />
                             <Button
                                 color="rose"
-                                onClick={registerClick}
+                                type="submit"
                                 className={classes.registerButton}
                             >
                                 Register
