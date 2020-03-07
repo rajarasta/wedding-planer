@@ -23,8 +23,10 @@ import styles from "../../assets/jss/material-dashboard-pro-react/views/extended
 const useStyles = makeStyles(styles);
 
 export default function ExtendedTables() {
-  
-  
+  const getGuestFromFirebase = () => {
+    return [["1", "1", "1", "1", roundButtons]];
+  };
+
   const classes = useStyles();
   const fillButtons = [
     { color: "info", icon: Person },
@@ -89,20 +91,7 @@ export default function ExtendedTables() {
                 "Extra",
                 "Actions"
               ]}
-              tableData={[
-                [
-                  "1",
-                  "Ivo",
-                  "+1",
-                  "2020",
-                  "Piletina",
-                  fillButtons
-                ],
-                ["2", "Mivo", "+1, 2 djece", "2020", "Krompir", roundButtons],
-                ["3", "Kivo", "No", "2020", "Manistra", simpleButtons],
-                
-                
-              ]}
+              tableData={getGuestFromFirebase()}
               customCellClasses={[classes.center, classes.right, classes.right]}
               customClassesForCells={[0, 4, 5]}
               customHeadCellClasses={[
