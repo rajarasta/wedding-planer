@@ -26,11 +26,11 @@ import weddingTable from "../../assets/pictures/wedding-table5.jpg";
 import weddingChurch from "../../assets/pictures/wedding-church.jpg";
 import weddingAccomodation from "../../assets/pictures/wedding-accomodation.jpg";
 
-import { withRouter } from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 
-function Dashboard({history}) {
+function Dashboard({ history }) {
   const classes = useStyles();
   return (
     <div>
@@ -40,7 +40,12 @@ function Dashboard({history}) {
         <GridItem xs={12} sm={12} md={4}>
           <Card product className={classes.cardHover}>
             <CardHeader image className={classes.cardHeaderHover}>
-              <a href="#pablo" onClick={()=>{history.push('guests')}}>
+              <a
+                href="#pablo"
+                onClick={() => {
+                  history.push("guests");
+                }}
+              >
                 <img src={weddingTable} alt="..." />
               </a>
             </CardHeader>
@@ -83,12 +88,11 @@ function Dashboard({history}) {
                 </a>
               </h4>
               <p className={classes.cardProductDesciprion}>
-                Manage all the people that will be the there on your special day.
+                Manage all the people that will be the there on your special
+                day.
               </p>
             </CardBody>
-            <CardFooter product>
-              FOOTER
-            </CardFooter>
+            <CardFooter product>FOOTER</CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -137,13 +141,11 @@ function Dashboard({history}) {
                 </a>
               </h4>
               <p className={classes.cardProductDesciprion}>
-              {/*TODO location top level description*/ }
+                {/*TODO location top level description*/}
                 ###Locations top level description
               </p>
             </CardBody>
-            <CardFooter product>
-              FOOTER
-            </CardFooter>
+            <CardFooter product>FOOTER</CardFooter>
           </Card>
         </GridItem>
         <GridItem xs={12} sm={12} md={4}>
@@ -192,12 +194,10 @@ function Dashboard({history}) {
                 </a>
               </h4>
               <p className={classes.cardProductDesciprion}>
-               ####Accomodation top level description
+                ####Accomodation top level description
               </p>
             </CardBody>
-            <CardFooter product>
-              FOOTER
-            </CardFooter>
+            <CardFooter product>FOOTER</CardFooter>
           </Card>
         </GridItem>
       </GridContainer>
