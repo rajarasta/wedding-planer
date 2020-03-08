@@ -32,6 +32,9 @@ import CardFooter from "../../components/Card/CardFooter.js";
 // style for this view
 import styles from "../../assets/jss/material-dashboard-pro-react/views/validationFormsStyle.js";
 
+//Firebase
+import {firestore} from "../../firebase/firebase.utils.js";
+
 const useStyles = makeStyles(styles);
 
 export default function ValidationForms() {
@@ -79,6 +82,10 @@ export default function ValidationForms() {
   const [minValueState, setminValueState] = React.useState("");
   const [maxValue, setmaxValue] = React.useState("");
   const [maxValueState, setmaxValueState] = React.useState("");
+  
+  //Saves accomodation value for future use
+  const [accomodationValue, setaccomodationValue] = React.useState("");
+
   // function that returns true if value is email, false otherwise
   const verifyEmail = value => {
     var emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -102,9 +109,12 @@ export default function ValidationForms() {
     }
     return false;
   };
-  //Handles accomodation selection
+
+  //Handles accomodation selection. Uses helpet state {accomodationValue}.
   const handleSimple = event => {
     setSimpleSelect(event.target.value);
+    console.log(event.target.value);
+    setaccomodationValue(event.target.value)
   };
   // verifies if value is a valid URL
   const verifyUrl = value => {
@@ -115,7 +125,11 @@ export default function ValidationForms() {
       return false;
     }
   };
-  const registerClick = () => {
+
+  /*Handles registering new user to firebase. Must be set as async*/
+  //TODO: set this as async. Does JS Firebase already does this as async?
+  const registerNewGuest = event => {
+    event.preventDefault();
     if (registerEmailState === "") {
       setregisterEmailState("error");
     }
@@ -128,9 +142,23 @@ export default function ValidationForms() {
     if (registerCheckboxState === "") {
       setregisterCheckboxState("error");
     }
-    if (requiredPhoneState === "") {
-      setrequiredState("error");
-    }
+
+    const guestRef = event.target.elements;
+    var guestReference = firestore.collection("guests").doc()
+    const dateTime = Date()
+
+    guestReference.set({
+        firstname: guestRef.firstName.value,
+        lastName: guestRef.lastName.value,
+        phone: guestRef.phone.value,
+        eMail: guestRef.eMail.value,
+        additionalAdults: guestRef.additionalAdults.value,
+        additionalChildren: guestRef.additionalChildren.value,
+        accomodation: accomodationValue,
+        reference: guestReference.id,
+        dateAdded: dateTime
+    });
+
   };
   const loginClick = () => {
     if (loginEmailState === "") {
@@ -186,10 +214,11 @@ export default function ValidationForms() {
             <h4 className={classes.cardIconTitle}>Register Forms</h4>
           </CardHeader>
           <CardBody>
-            <form>
+            <form onSubmit={registerNewGuest}>
               <CustomInput
                 labelText="First Name"
                 id="firstName"
+                name="firstName"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -239,7 +268,8 @@ export default function ValidationForms() {
 
               <CustomInput
                 labelText="Additional Adults"
-                id="firstName"
+                id="additionalAdults"
+                name="additionalAdults"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -249,7 +279,7 @@ export default function ValidationForms() {
               />
               <CustomInput
                 labelText="Additional Children"
-                id="lastName"
+                id="additionalChildren"
                 formControlProps={{
                   fullWidth: true
                 }}
@@ -258,8 +288,12 @@ export default function ValidationForms() {
                 }}
               />
 
-              <GridItem xs={12} sm={6} md={5} lg={5}>
-                <FormControl fullWidth className={classes.selectFormControl}>
+              <GridItem xs={12} sm={6} md={5} lg={5} name="accomodationSelect">
+                <FormControl
+                  fullWidth
+                  className={classes.selectFormControl}
+                  name="accomodationSelect"
+                >
                   <InputLabel
                     htmlFor="simple-select"
                     className={classes.selectLabel}
@@ -267,6 +301,8 @@ export default function ValidationForms() {
                     Accomodation
                   </InputLabel>
                   <Select
+                    // {TODO: Accomodation must be drawn from database }
+                    name="accomodationSelect"
                     MenuProps={{
                       className: classes.selectMenu
                     }}
@@ -294,7 +330,7 @@ export default function ValidationForms() {
                         root: classes.selectMenuItem,
                         selected: classes.selectMenuItemSelected
                       }}
-                      value="2"
+                      value="Hilton"
                     >
                       Hilton
                     </MenuItem>
@@ -303,7 +339,7 @@ export default function ValidationForms() {
                         root: classes.selectMenuItem,
                         selected: classes.selectMenuItemSelected
                       }}
-                      value="3"
+                      value="Panorama"
                     >
                       Panorama
                     </MenuItem>
@@ -312,7 +348,7 @@ export default function ValidationForms() {
                         root: classes.selectMenuItem,
                         selected: classes.selectMenuItemSelected
                       }}
-                      value="4"
+                      value="Westin"
                     >
                       Westin
                     </MenuItem>
@@ -351,7 +387,7 @@ export default function ValidationForms() {
               />
               <Button
                 color="rose"
-                onClick={registerClick}
+                type="submit"
                 className={classes.registerButton}
               >
                 Register
