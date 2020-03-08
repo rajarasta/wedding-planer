@@ -83,7 +83,7 @@ export default function DashboardLayout(props) {
         <div className={classes.content}>
           <div className={classes.container}>
             <Switch>
-              <Route exact path="/timeline" component={LoginPage} />
+              <Route exact path="/timeline" component={TimelinePage} />
               <Route exact path="/home-page" component={HomePage} />
               <Route exact path="/" component={TimelinePage} />
               <Route path="/wedding-page" component={WeddingPage} />
