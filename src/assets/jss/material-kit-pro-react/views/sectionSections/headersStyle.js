@@ -45,8 +45,7 @@ const headersSection = theme => ({
     WebkitBoxAlign: "center",
     MsFlexAlign: "center",
     alignItems: "center",
-    "&:before": {
-      background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"
+    "&:before": { //Removed alpa {background: "rgba(" + hexToRgb(blackColor) + ", 0.5)"}
     },
     "&:after,&:before": {
       position: "absolute",

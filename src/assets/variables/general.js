@@ -97,18 +97,14 @@ const widgetStories = [
     inverted: true,
     badgeColor: "danger",
     badgeIcon: CardTravel,
-    title: "Some Title",
+    title: "Okupljanje",
     titleColor: "danger",
     body: (
       <p>
-        Wifey made the best Father{"'"}s Day meal ever. So thankful so happy so
-        blessed. Thank you for making my family We just had fun with the
-        “future” theme !!! It was a fun night all together ... The always rude
-        Kanye Show at 2am Sold Out Famous viewing @ Figueroa and 12th in
-        downtown.
+        Okupljanje kod Lincija
       </p>
     ),
-    footerTitle: "11 hours ago via Twitter"
+    footerTitle: "12:00 Lošinjska 24"
   },
   {
     // Second story
@@ -177,52 +173,42 @@ const stories = [
     inverted: true,
     badgeColor: "danger",
     badgeIcon: CardTravel,
-    title: "Some Title",
+    title: "Okupljanje",
     titleColor: "danger",
     body: (
       <p>
-        Wifey made the best Father{"'"}s Day meal ever. So thankful so happy so
-        blessed. Thank you for making my family We just had fun with the
-        “future” theme !!! It was a fun night all together ... The always rude
-        Kanye Show at 2am Sold Out Famous viewing @ Figueroa and 12th in
-        downtown.
+      Okupljanje kod Lincija
       </p>
     ),
-    footerTitle: "11 hours ago via Twitter"
+    footerTitle: "12:00 Lošinjska"
   },
   {
     // Second story
     badgeColor: "success",
     badgeIcon: Extension,
-    title: "Another One",
+    title: "Crkva",
     titleColor: "success",
     body: (
       <p>
-        Thank God for the support of my wife and real friends. I also wanted to
-        point out that it’s the first album to go number 1 off of streaming!!! I
-        love you Ellen and also my number one design rule of anything I do from
-        shoes to music to homes is that Kim has to like it....
+      Dođite svi u crkvu
       </p>
-    )
+    ),
+    footerTitle: "16:00 Svetog Nikole"
   },
   {
     // Third story
     inverted: true,
     badgeColor: "info",
     badgeIcon: Fingerprint,
-    title: "Another Title",
+    title: "Večera",
     titleColor: "info",
     body: (
       <div>
         <p>
-          Called I Miss the Old Kanye That’s all it was Kanye And I love you
-          like Kanye loves Kanye Famous viewing @ Figueroa and 12th in downtown
-          LA 11:10PM
+        Janjetina
         </p>
         <p>
-          What if Kanye made a song about Kanye Royère doesn{"'"}t make a Polar
-          bear bed but the Polar bear couch is my favorite piece of furniture we
-          own It wasn’t any Kanyes Set on his goals Kanye
+        Janjetina
         </p>
       </div>
     ),
@@ -235,11 +221,8 @@ const stories = [
           color: "info"
         }}
         dropdownList={[
-          "Action",
-          "Another action",
-          "Something else here",
-          { divider: true },
-          "Separated link"
+          "Može pisat što hoćeš sa opcijama",
+          "Another action"
         ]}
       />
     )
@@ -248,14 +231,11 @@ const stories = [
     // Fourth story
     badgeColor: "warning",
     badgeIcon: FlightLand,
-    title: "Another One",
+    title: "Možda smještaj",
     titleColor: "warning",
     body: (
       <p>
-        Tune into Big Boy{"'"}s 92.3 I{"'"}m about to play the first single from
-        Cruel Winter also to Kim’s hair and makeup Lorraine jewelry and the
-        whole style squad at Balmain and the Yeezy team. Thank you Anna for the
-        invite thank you to the whole Vogue team
+        Nabrojani smještaji, kasnije dopisano obaviješteno?
       </p>
     )
   }

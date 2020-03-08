@@ -21,7 +21,7 @@ import CustomInput from "../../components/CustomInput/CustomInput.js";
 
 import headersStyle from "../../assets/jss/material-kit-pro-react/views/sectionSections/headersStyle.js";
 
-import bg12 from "../../assets/img/bg12.jpg";
+import bg12 from "../../assets/pictures/mirna_i_antonio.jpg";
 
 const useStyles = makeStyles(headersStyle);
 
@@ -45,124 +45,13 @@ export default function SectionHeaders({ ...rest }) {
           absolute
           brand="Creative Tim"
           color="transparent"
-          links={
-            <div className={classes.collapse}>
-              <List className={classes.list + " " + classes.mlAuto}>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    href="#pablo"
-                    className={classes.navLink}
-                    onClick={e => e.preventDefault()}
-                    color="transparent"
-                  >
-                    Home
-                  </Button>
-                </ListItem>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    href="#pablo"
-                    className={classes.navLink}
-                    onClick={e => e.preventDefault()}
-                    color="transparent"
-                  >
-                    About us
-                  </Button>
-                </ListItem>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    href="#pablo"
-                    className={classes.navLink}
-                    onClick={e => e.preventDefault()}
-                    color="transparent"
-                  >
-                    Products
-                  </Button>
-                </ListItem>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    href="#pablo"
-                    className={classes.navLink}
-                    onClick={e => e.preventDefault()}
-                    color="transparent"
-                  >
-                    Contact us
-                  </Button>
-                </ListItem>
-              </List>
-              <List className={classes.list + " " + classes.mlAuto}>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    color="transparent"
-                    href="https://twitter.com/CreativeTim?ref=creativetim"
-                    target="_blank"
-                    className={classes.navLink + " " + classes.navLinkJustIcon}
-                  >
-                    <i className={"fab fa-twitter"} />
-                  </Button>
-                </ListItem>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    color="transparent"
-                    href="https://www.facebook.com/CreativeTim?ref=creativetim"
-                    target="_blank"
-                    className={classes.navLink + " " + classes.navLinkJustIcon}
-                  >
-                    <i className={"fab fa-facebook"} />
-                  </Button>
-                </ListItem>
-                <ListItem className={classes.listItem}>
-                  <Button
-                    color="transparent"
-                    href="https://www.instagram.com/CreativeTimOfficial?ref=creativetim"
-                    target="_blank"
-                    className={classes.navLink + " " + classes.navLinkJustIcon}
-                  >
-                    <i className={"fab fa-instagram"} />
-                  </Button>
-                </ListItem>
-              </List>
-            </div>
-          }
+         
         />
         <div
           className={classes.pageHeader}
           style={{ backgroundImage: `url("${bg12}")` }}
         >
-          <div className={classes.container}>
-            <GridContainer>
-              <GridItem xs={12} sm={6} md={6}>
-                <h1 className={classes.title}>Tesla Model 3.</h1>
-                <h4>
-                  There{"'"}s no doubt that Tesla is delighted with the
-                  interest, but the data also raises a few questions. How long
-                  will it take for Tesla to fulfill all those extra orders?
-                </h4>
-                <br />
-                <Button
-                  color="danger"
-                  size="lg"
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ref=creativetim"
-                  target="_blank"
-                  rel=""
-                >
-                  <i className="fas fa-ticket-alt" />
-                  Order Now
-                </Button>
-              </GridItem>
-              <GridItem xs={12} sm={5} md={5} className={classes.mlAuto}>
-                <div className={classes.iframeContainer}>
-                  <iframe
-                    height="250"
-                    src="https://www.youtube.com/embed/IN6QnLpVEPI?ref=creativetim"
-                    frameBorder="0"
-                    allow="encrypted-media"
-                    allowFullScreen=""
-                    title="Tesla"
-                  />
-                </div>
-              </GridItem>
-            </GridContainer>
-          </div>
+
         </div>
       </div>
       {/* HEADER 1 END */}
