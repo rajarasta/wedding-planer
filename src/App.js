@@ -1,37 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-import HomePage from './pages/home-page.component';
+import HomePage from "./pages/home-page.component";
 import WeddingPage from "./pages/wedding-page/wedding-page.component";
 import LoginPage from "./pages/login-page/login-page.component";
 import Dashboard from "./pages/dashboard-page/dashboard.component";
-import Guests from './pages/guests/guests.components';
-import AddGuestPage from './pages/add-guest-page/add-guest-page.components'
-
+import Guests from "./pages/guests/guests.components";
+import AddGuestPage from "./pages/add-guest-page/add-guest-page.components";
+import TimelinePage from "./pages/TimelinePage/TimelinePage.js";
+import DashboardLayout from "./layouts/Admin/Admin";
 
 //React Router for page navigation imports
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from "react-router-dom";
 
 //
-
+//TODO: correct back to what it was after timeline was solved
 class App extends React.Component {
-
   render() {
     return (
       <div className="App">
-        <Switch>
-        <Route exact path='/' component={LoginPage} />
-          <Route exact path='/home-page' component={HomePage} />
-          <Route path='/wedding-page' component={WeddingPage} />
-          <Route path='/login-page' component={LoginPage} />
-          <Route path='/dashboard' component={Dashboard} />
-          <Route path='/guests' component={Guests} />
-          <Route path='/add-guest-page' component={AddGuestPage} />
-        </Switch>
+       <DashboardLayout/>
       </div>
     );
   }
 }
-
 export default App;

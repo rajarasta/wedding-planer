@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import "../src/assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
+
 ReactDOM.render(
 
     <BrowserRouter>
