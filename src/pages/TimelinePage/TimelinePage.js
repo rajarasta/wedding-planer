@@ -8,6 +8,7 @@ import Timeline from "../../components/Timeline/Timeline.js";
 import Card from "../../components/Card/Card.js";
 import CardBody from "../../components/Card/CardBody.js";
 import SectionHeaders from "../../components/SectionHeaders/SectionHeaders.js";
+import RsvpInvitationSection from "../../components/RsvpInvitationSection/RsvpInvitationSection.js";
 
 import { stories } from "../../assets/variables/general";
 
@@ -20,6 +21,13 @@ export default function TimelinePage() {
           <Card plain>
             <CardBody plain>
               <Timeline stories={stories} />
+            </CardBody>
+          </Card>
+        </GridItem>
+        <GridItem xs={12}>
+          <Card plain>
+            <CardBody plain>
+              <RsvpInvitationSection/>
             </CardBody>
           </Card>
         </GridItem>

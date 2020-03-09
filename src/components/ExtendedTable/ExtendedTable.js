@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -20,41 +20,54 @@ import CardHeader from "../../components/Card/CardHeader.js";
 
 import styles from "../../assets/jss/material-dashboard-pro-react/views/extendedTableStyle";
 
+import { withRouter } from "react-router-dom";
+//Functions
+import getAllGuests, {
+  getGuest
+} from "../../server/functions/controllers/guests.js";
+
+//Firebase
+import { firestore } from "../../firebase/firebase.utils.js";
+
 const useStyles = makeStyles(styles);
 
-export default function ExtendedTables() {
+function ExtendedTables({ history }) {
+  const [tableData, setTableData] = React.useState([]);
+
+  useEffect(() => {
+    getGuestFromFirebase();
+  }, []);
+
   const getGuestFromFirebase = () => {
-    return [["1", "1", "1", "1", roundButtons]];
+    console.log("called1");
+    const guestsTableData = [];
+    firestore
+      .collection("guests")
+      .get()
+      .then(guestsArray => {
+        console.log(guestsArray);
+        guestsArray.forEach(element => {
+          const _element = element.data();
+          console.log(_element);
+          guestsTableData.push([
+            _element.firstname,
+            _element.lastName,
+            _element.additionalAdults,
+            _element.phone,
+            roundButtons
+          ]);
+        });
+        setTableData(guestsTableData);
+      });
   };
 
   const classes = useStyles();
-  const fillButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
-  ].map((prop, key) => {
-    return (
-      <Button color={prop.color} className={classes.actionButton} key={key}>
-        <prop.icon className={classes.icon} />
-      </Button>
-    );
-  });
-  const simpleButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
-  ].map((prop, key) => {
-    return (
-      <Button
-        color={prop.color}
-        simple
-        className={classes.actionButton}
-        key={key}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    );
-  });
+
+  const handleButtonClick = () => {
+    //Linking.openURL('whatsapp://send?text=hello&phone=xxxxxxxxxxxxx')
+    window.location.href='whatsapp://send?text=hello&phone=385955415'
+  };
+
   const roundButtons = [
     { color: "info", icon: Person },
     { color: "success", icon: Edit },
@@ -66,11 +79,13 @@ export default function ExtendedTables() {
         color={prop.color}
         className={classes.actionButton + " " + classes.actionButtonRound}
         key={key}
+        onClick={handleButtonClick}
       >
         <prop.icon className={classes.icon} />
       </Button>
     );
   });
+
   return (
     <GridContainer>
       <GridItem xs={12}>
@@ -84,14 +99,13 @@ export default function ExtendedTables() {
           <CardBody>
             <Table
               tableHead={[
-                "#",
-                "Name",
-                "Entourage",
-                "Request sent",
-                "Extra",
+                "First Name",
+                "Last Name",
+                "Additional Adults",
+                "Extra info",
                 "Actions"
               ]}
-              tableData={getGuestFromFirebase()}
+              tableData={tableData}
               customCellClasses={[classes.center, classes.right, classes.right]}
               customClassesForCells={[0, 4, 5]}
               customHeadCellClasses={[
@@ -107,3 +121,5 @@ export default function ExtendedTables() {
     </GridContainer>
   );
 }
+
+export default withRouter(ExtendedTables);
