@@ -2,6 +2,13 @@
   "name": "wedding-planer",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "analyze": "source-map-explorer 'build/static/js/*.js'"
+  },
   "dependencies": {
     "@material-ui/core": "^4.9.4",
     "@material-ui/icons": "^4.9.1",
@@ -24,11 +31,12 @@
     "redux-logger": "^3.0.6",
     "reselect": "^4.0.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "babel-plugin-import": "^1.13.0",
+    "customize-cra": "^0.9.1",
+    "prettier": "^1.19.1",
+    "react-app-rewired": "^2.1.5",
+    "source-map-explorer": "^2.3.1"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,7 +53,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "prettier": "^1.19.1"
-  }
+  "proxy": "https://europe-west1-wedding-planner-orion.cloudfunctions.net"
 }
