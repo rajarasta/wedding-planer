@@ -54,37 +54,48 @@ function ExtendedTables({ history }) {
             _element.lastName,
             _element.additionalAdults,
             _element.phone,
-            roundButtons
+            makeRoundButtons(_element.firstname)
           ]);
         });
+
         setTableData(guestsTableData);
       });
   };
 
   const classes = useStyles();
 
-  const handleButtonClick = () => {
+  const handleButtonClick = event => {
     //Linking.openURL('whatsapp://send?text=hello&phone=xxxxxxxxxxxxx')
-    window.location.href='whatsapp://send?text=hello&phone=385955415'
+    var inviteLink = event.currentTarget.attributes.getNamedItem("newattr").value
+    history.push(`/timeline/:${inviteLink}`)
   };
 
-  const roundButtons = [
-    { color: "info", icon: Person },
-    { color: "success", icon: Edit },
-    { color: "danger", icon: Close }
-  ].map((prop, key) => {
-    return (
-      <Button
-        round
-        color={prop.color}
-        className={classes.actionButton + " " + classes.actionButtonRound}
-        key={key}
-        onClick={handleButtonClick}
-      >
-        <prop.icon className={classes.icon} />
-      </Button>
-    );
-  });
+  const makeRoundButtons = link => {
+    const roundButtons = [
+      { color: "info", icon: Person },
+      { color: "success", icon: Edit },
+      { color: "danger", icon: Close }
+    ];
+
+    const newButons = roundButtons.map((prop, key) => {
+      console.log(link);
+      return (
+        <Button
+          newattr={link}
+          id={link}
+          round
+          color={prop.color}
+          className={classes.actionButton + " " + classes.actionButtonRound}
+          key={key}
+          onClick={handleButtonClick}
+        >
+          <prop.icon className={classes.icon} />
+        </Button>
+      );
+    });
+
+    return newButons;
+  };
 
   return (
     <GridContainer>

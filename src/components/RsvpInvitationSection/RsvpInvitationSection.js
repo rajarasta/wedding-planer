@@ -37,7 +37,9 @@ import { firestore } from "../../firebase/firebase.utils.js";
 
 const useStyles = makeStyles(styles);
 
-export default function RsvpInvitationSection() {
+export default function RsvpInvitationSection(props) {
+  const { inviteID } = props;
+  console.log("invite id je" + inviteID);
   // register form
   const [registerEmail, setregisterEmail] = React.useState("");
   const [registerEmailState, setregisterEmailState] = React.useState("");
@@ -147,7 +149,7 @@ export default function RsvpInvitationSection() {
     var guestReference = firestore.collection("guests").doc();
     const dateTime = Date();
   };
-  
+
   const loginClick = () => {
     if (loginEmailState === "") {
       setloginEmailState("error");
@@ -192,7 +194,7 @@ export default function RsvpInvitationSection() {
   };
   const classes = useStyles();
   return (
-    <GridContainer>
+    <GridContainer xs={12} sm={12} md={12}>
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="rose" icon>
@@ -235,9 +237,7 @@ export default function RsvpInvitationSection() {
                 }}
               />
               <FormControlLabel
-                control={
-                  <div/>
-                }
+                control={<div />}
                 classes={{
                   label:
                     classes.label +
