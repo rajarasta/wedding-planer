@@ -8,10 +8,11 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 
-// core components
 
+// core components
 import styles from "../../assets/jss/material-dashboard-pro-react/layouts/adminStyle";
 
+//Page components
 import HomePage from "../../pages/home-page.component";
 import WeddingPage from "../../pages/wedding-page/wedding-page.component";
 import LoginPage from "../../pages/login-page/login-page.component";
@@ -19,13 +20,22 @@ import Dashboard from "../../pages/dashboard-page/dashboard.component";
 import Guests from "../../pages/guests/guests.components";
 import AddGuestPage from "../../pages/add-guest-page/add-guest-page.components";
 import TimelinePage from "../../pages/TimelinePage/TimelinePage.js";
+import TimelineOverviewPage from "../../pages/TimelineOverview/TimelineOverviewPage";
+
+//Router
+import {withRouter} from "react-router-dom";
+
+//Redux
+import {connect} from "react-redux";
+import { setTestValue } from "../../redux/redux-test/redux-test.actions";
+
 
 var ps;
 
 const useStyles = makeStyles(styles);
 
-export default function DashboardLayout(props) {
-  const { ...rest } = props;
+function DashboardLayout(props) {
+  const { setTestValue } = props;
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
@@ -47,6 +57,8 @@ export default function DashboardLayout(props) {
   const mainPanel = React.createRef();
   // effect instead of componentDidMount, componentDidUpdate and componentWillUnmount
   React.useEffect(() => {
+    setTestValue("jedan")
+    
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -83,19 +95,29 @@ export default function DashboardLayout(props) {
         <div className={classes.content}>
           <div className={classes.container}>
             <Switch>
-              <Route exact path="/timeline" component={TimelinePage} />
+              <Route exact path="/" component={LoginPage} />
               <Route exact path="/home-page" component={HomePage} />
-              <Route exact path="/" component={TimelinePage} />
-              <Route path="/wedding-page" component={WeddingPage} />
-              <Route path="/login-page" component={LoginPage} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/guests" component={Guests} />
-              <Route path="/add-guest-page" component={AddGuestPage} />
+              <Route path="/timeline" component={TimelineOverviewPage} />
+              <Route exact path="/wedding-page" component={WeddingPage} />
+              <Route exact path="/login-page" component={LoginPage} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/guests" component={Guests} />
+              <Route exact path="/add-guest-page" component={AddGuestPage} />
             </Switch>
           </div>
         </div>
-        
       </div>
     </div>
   );
 }
+
+const mapStateToProps = ({value}) => ({
+  reduxValue: value
+
+})
+
+const mapDispatchToProps = dispatch => ({
+  setTestValue: value => dispatch(setTestValue(value))
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DashboardLayout));

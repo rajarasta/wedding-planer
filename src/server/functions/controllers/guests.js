@@ -38,10 +38,11 @@ exports.getGuest = (req, res) => {
 };
 
 exports.getAllGuests = (req, res) => {
+  console.log(res, req, "Pozvan getAllGuests")
   let guests = [];
 
   // Fetch the event
-  db.doc(`/events/${req.params.eventId}`)
+  db.doc(`/events/${req.params.eventId}`) //TODO: je li ode treba guests?!
     .get()
     .then(doc => {
       // Check if the event exists and if user is it's author

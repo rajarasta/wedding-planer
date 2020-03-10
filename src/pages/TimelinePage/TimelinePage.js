@@ -8,13 +8,14 @@ import Timeline from "../../components/Timeline/Timeline.js";
 import Card from "../../components/Card/Card.js";
 import CardBody from "../../components/Card/CardBody.js";
 import SectionHeaders from "../../components/SectionHeaders/SectionHeaders.js";
+import RsvpInvitationSection from "../../components/RsvpInvitationSection/RsvpInvitationSection.js";
 
 import { stories } from "../../assets/variables/general";
 
-export default function TimelinePage() {
+function TimelinePage({ match }) {
   return (
     <div>
-      <SectionHeaders/>
+      <SectionHeaders />
       <GridContainer>
         <GridItem xs={12}>
           <Card plain>
@@ -23,7 +24,22 @@ export default function TimelinePage() {
             </CardBody>
           </Card>
         </GridItem>
+        <GridItem xs={12}>
+          <h3>{"Invite for " + match.params.inviteID.substring(1)}</h3>
+        </GridItem>
+
+        <GridItem xs={12}>
+          <Card plain style={{ marginBottom: "0px", marginTop: "0px" }}>
+            {" "}
+            {/*TODO: ovo malo bolje rijesi*/}
+            <CardBody plain>
+              <RsvpInvitationSection inviteID={match.params.inviteID} />
+            </CardBody>
+          </Card>
+        </GridItem>
       </GridContainer>
     </div>
   );
 }
+
+export default TimelinePage;
