@@ -29,8 +29,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 firebase-debug.log*
-key
-key.json
+FirebaseAdminKey.json
+config.js
 .env
 
 # Firebase cache

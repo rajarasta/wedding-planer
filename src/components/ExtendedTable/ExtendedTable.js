@@ -21,19 +21,13 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import styles from "../../assets/jss/material-dashboard-pro-react/views/extendedTableStyle";
 
 import { withRouter } from "react-router-dom";
-//Functions
-import getAllGuests, {
-  getGuest
-} from "../../server/functions/controllers/guests.js";
-
-//Firebase
-import { firestore } from "../../firebase/firebase.utils.js";
 
 const useStyles = makeStyles(styles);
 
 function ExtendedTables({ history }) {
   const [tableData, setTableData] = React.useState([]);
 
+  /*
   useEffect(() => {
     getGuestFromFirebase();
   }, []);
@@ -60,14 +54,15 @@ function ExtendedTables({ history }) {
 
         setTableData(guestsTableData);
       });
-  };
+  }; */
 
   const classes = useStyles();
 
   const handleButtonClick = event => {
     //Linking.openURL('whatsapp://send?text=hello&phone=xxxxxxxxxxxxx')
-    var inviteLink = event.currentTarget.attributes.getNamedItem("newattr").value
-    history.push(`/timeline/:${inviteLink}`)
+    var inviteLink = event.currentTarget.attributes.getNamedItem("newattr")
+      .value;
+    history.push(`/timeline/:${inviteLink}`);
   };
 
   const makeRoundButtons = link => {

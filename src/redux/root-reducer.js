@@ -1,12 +1,11 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 
-import userReducer from "./user/user.reducer";
+import userReducer from "./reducers/userReducer";
+import uiReducer from "./reducers/uiReducer";
 import testReducer from "./redux-test/redux-test.reducer";
 
 export default combineReducers({
-    user: userReducer,
-    testValueCombiner: testReducer
+  user: userReducer,
+  UI: uiReducer,
+  testValueCombiner: testReducer
 });
-
-
-

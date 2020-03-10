@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+// Redux stuff
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../redux/actions/userActions";
+
+// Router
+import { withRouter } from "react-router-dom";
+
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 
 // @material-ui/icons
-
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/Lock";
 // import LockOutline from "@material-ui/icons/LockOutline";
@@ -25,8 +31,6 @@ import styles from "../../assets/jss/material-dashboard-pro-react/views/loginPag
 
 import lock from "../../assets/pictures/lock.jpeg";
 
-import { withRouter } from "react-router-dom";
-
 const useStyles = makeStyles(styles);
 
 function LoginPage({ history }) {
@@ -38,25 +42,23 @@ function LoginPage({ history }) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
 
-  function handleLogin() {
-    const requestBodyJSON = {
+  const state = useSelector(state => {
+    return {
+      user: state.user,
+      UI: state.UI
+    };
+  });
+
+  const dispatch = useDispatch();
+
+  function handleLogin(event) {
+    event.preventDefault();
+    const userData = {
       email: email,
       password: password
     };
-    axios
-      .post(`/api/login`, requestBodyJSON, {
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(response => {
-        console.log(response.data.token);
-        history.push("/home-page");
-      })
-      .catch(err => {
-        console.error(err);
-        return { error: err.code, message: "Login failed" };
-      });
+    dispatch(loginUser(userData, history));
   }
 
   return (
@@ -142,7 +144,7 @@ function LoginPage({ history }) {
                     color="rose"
                     simple
                     size="lg"
-                    onClick={() => handleLogin()}
+                    onClick={e => handleLogin(e)}
                     block
                   >
                     Log In

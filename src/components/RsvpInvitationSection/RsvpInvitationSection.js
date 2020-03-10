@@ -33,7 +33,7 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-pro-react/components/rsvpInvitationSection.js";
 
 //Firebase
-import { firestore } from "../../firebase/firebase.utils.js";
+// import { firestore } from "../../firebase/firebase.utils.js";
 
 const useStyles = makeStyles(styles);
 
@@ -146,7 +146,7 @@ export default function RsvpInvitationSection(props) {
     }
 
     const guestRef = event.target.elements;
-    var guestReference = firestore.collection("guests").doc();
+    var guestReference; // = firestore.collection("guests").doc();
     const dateTime = Date();
   };
 

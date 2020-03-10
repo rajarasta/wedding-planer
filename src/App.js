@@ -1,7 +1,17 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
+import "../src/assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
 
+//Redux
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { SET_AUTHENTICATED } from "./redux/types";
+import { logoutUser, getUserData } from "./redux/actions/userActions";
+
+//Router
+import { BrowserRouter } from "react-router-dom";
+
+// Pages and routes
 import HomePage from "./pages/home-page.component";
 import WeddingPage from "./pages/wedding-page/wedding-page.component";
 import LoginPage from "./pages/login-page/login-page.component";
@@ -14,15 +24,35 @@ import DashboardLayout from "./layouts/Admin/Admin";
 //React Router for page navigation imports
 import { Switch, Route, Redirect } from "react-router-dom";
 
-//
-//TODO: correct back to what it was after timeline was solved
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-       <DashboardLayout/>
-      </div>
-    );
+// Authentication
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+
+const token = localStorage.FBidToken;
+if (token) {
+  const decodedToken = jwtDecode(token);
+  if (decodedToken.exp * 1000 < Date.now()) {
+    store.dispatch(logoutUser());
+    window.location.href = "/login-page";
+  } else {
+    store.dispatch({ type: SET_AUTHENTICATED });
+    axios.defaults.headers.common["Authorization"] = token;
+    store.dispatch(getUserData());
   }
 }
+// End of Authentication
+
+//TODO: correct back to what it was after timeline was solved
+function App() {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="App">
+          <DashboardLayout />
+        </div>
+      </BrowserRouter>
+    </Provider>
+  );
+}
+
 export default App;
