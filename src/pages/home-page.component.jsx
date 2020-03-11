@@ -118,7 +118,7 @@ function HomePage({ history }) {
   const dispatch = useDispatch();
 
   return (
-    <GridContainer className={classes.homePage}>
+    <GridContainer>
       <GridItem xs={12} sm={12} md={4}>
         <Card profile>
           <CardBody profile>

@@ -20,7 +20,7 @@ import Dashboard from "./pages/dashboard-page/dashboard.component";
 import Guests from "./pages/guests/guests.components";
 import AddGuestPage from "./pages/add-guest-page/add-guest-page.components";
 import TimelinePage from "./pages/TimelinePage/TimelinePage.js";
-import DashboardLayout from "./layouts/Admin/Admin";
+import HomeDashboard from "./layouts/HomeDashboard/HomeDashboard.js";
 
 //React Router for page navigation imports
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -49,7 +49,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <div className="App">
-          <DashboardLayout />
+          <HomeDashboard />
         </div>
       </BrowserRouter>
     </Provider>

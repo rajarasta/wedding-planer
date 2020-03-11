@@ -32,7 +32,7 @@ const appStyle = theme => ({
     overflowScrolling: "touch"
   },
   content: {
-    marginTop: "0px", //Changed from 70px
+    marginTop: "70px",
     padding: "30px 15px",
     minHeight: "calc(100vh - 123px)"
   },

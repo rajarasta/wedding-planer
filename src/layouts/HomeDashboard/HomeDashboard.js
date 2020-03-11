@@ -11,20 +11,15 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 import styles from "../../assets/jss/material-dashboard-pro-react/layouts/adminStyle";
 
-//Page components
-import HomePage from "../../pages/home-page.component";
-import WeddingPage from "../../pages/wedding-page/wedding-page.component";
-import Login from "../../pages/login/login.component";
-import Signup from "../../pages/signup/signup.component";
-import Dashboard from "../../pages/dashboard-page/dashboard.component";
-import Guests from "../../pages/guests/guests.components";
-import AddGuestPage from "../../pages/add-guest-page/add-guest-page.components";
-import TimelinePage from "../../pages/TimelinePage/TimelinePage.js";
-import TimelineOverviewPage from "../../pages/TimelineOverview/TimelineOverviewPage";
-import RegisterPage from '../../pages/RegisterPage/RegisterPage.js';
+import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
+import Footer from "../../components/Footer/Footer.js";
+import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
 
 //Router
 import { withRouter } from "react-router-dom";
+
+//Routes
+import routes from "../../routes";
 
 //Redux
 import { connect } from "react-redux";
@@ -34,8 +29,8 @@ var ps;
 
 const useStyles = makeStyles(styles);
 
-function DashboardLayout(props) {
-  const { setTestValue } = props;
+function HomeDashboard(props) {
+  const { setTestValue, ...rest } = props;
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
@@ -76,11 +71,6 @@ function DashboardLayout(props) {
       window.removeEventListener("resize", resizeFunction);
     };
   });
-  // functions for changeing the states from components
-
-  const getRoute = () => {
-    return window.location.pathname !== "/admin/full-screen-maps";
-  };
 
   const resizeFunction = () => {
     if (window.innerWidth >= 960) {
@@ -88,26 +78,54 @@ function DashboardLayout(props) {
     }
   };
 
+  const getActiveRoute = routes => {
+    let activeRoute = "Default Brand Text";
+    for (let i = 0; i < routes.length; i++) {
+      if (routes[i].collapse) {
+        let collapseActiveRoute = getActiveRoute(routes[i].name);
+        if (collapseActiveRoute !== activeRoute) {
+          return collapseActiveRoute;
+        }
+      } else {
+        if (
+          window.location.href.indexOf(routes[i].path) !== -1
+        ) {
+          return routes[i].name;
+        }
+      }
+    }
+    return activeRoute;
+  };
+
+  const getRoutes = routes => {
+    return routes.map((prop, key) => {
+      if (prop.layout === "/home-dashboard") {
+        console.log(prop.path);
+        return <Route path={prop.path} component={prop.component} key={key} />;
+      } else {
+        return null;
+      }
+    });
+  };
+
   return (
     <div className={classes.wrapper}>
       <div className={mainPanelClasses} ref={mainPanel}>
-        {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
+        <AdminNavbar
+          miniActive={miniActive}
+          {...rest}
+          brandText={getActiveRoute(routes)}
+        />
         <div className={classes.content}>
           <div className={classes.container}>
             <Switch>
-              <Route exact path="/" component={Login} />
-              <Route exact path="/home-page" component={HomePage} />
-              <Route exact path="/timeline" component={TimelineOverviewPage} />
-              <Route exact path="/wedding-page" component={WeddingPage} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/dashboard" component={Dashboard} />
-              <Route exact path="/guests" component={Guests} />
-              <Route exact path="/add-guest-page" component={AddGuestPage} />
-              <Route exact path="/signup" component={RegisterPage} />
+              {getRoutes(routes)}
+              <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>
           </div>
+          
         </div>
+        <Footer fluid />
       </div>
     </div>
   );
@@ -122,5 +140,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(DashboardLayout)
+  connect(mapStateToProps, mapDispatchToProps)(HomeDashboard)
 );
