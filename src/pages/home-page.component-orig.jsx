@@ -26,7 +26,6 @@ import CardAvatar from "../components/Card/CardAvatar";
 
 // Images
 import background from "../assets/pictures/backround.jpg";
-import avatar from "../assets/pictures/mirna_i_antonio.jpg";
 
 // CSS and style
 import {
@@ -84,13 +83,6 @@ const styles = {
   cardTestimonialDescription: {
     fontStyle: "italic",
     color: "#999999"
-  },
-  homePage: {
-    backgroundImage: `url(${background})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: 800
   }
 };
 
@@ -106,54 +98,53 @@ function HomePage({ history }) {
   // Styles
   const classes = useStyles();
 
-  // Redux
-  const state = useSelector(state => {
-    return {
-      user: state.user,
-      UI: state.UI,
-      events: state.user.events
-    };
-  });
-
-  const dispatch = useDispatch();
-
   return (
-    <GridContainer className={classes.homePage}>
-      <GridItem xs={12} sm={12} md={4}>
-        <Card profile>
-          <CardBody profile>
-            <h6 className={classes.cardCategory}>MIRNA I ANTONIO</h6>
+    <div
+      className="home-page"
+      style={{
+        backgroundImage: `url(${background})`,
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: 800
+      }}
+    >
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <GridContainer>
+            <GridItem xs={12} sm={12} lg={6}>
+              <Card profile>
+                <CardBody profile>
+                  <h6 className={classes.cardCategory}>MIRNA I ANTONIO</h6>
 
-            <h3 className={`${classes.cardTitle} ${classes.marginTop30}`}>
-              WEDDING
-            </h3>
-            <CardAvatar>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." style={{ height: 200 }} />
-              </a>
-            </CardAvatar>
-            <p className={classes.cardDescription}>Manage your wedding.</p>
-            <Button
-              round
-              color="rose"
-              onClick={() => {
-                history.push("/dashboard");
-              }}
-            >
-              HOME
-            </Button>
-          </CardBody>
-        </Card>
-      </GridItem>
+                  <h3 className={`${classes.cardTitle} ${classes.marginTop30}`}>
+                    WEDDING
+                  </h3>
+                  <CardAvatar>
+                    <a href="#pablo" onClick={e => e.preventDefault()}>
+                      <img src={avatar} alt="..." style={{ height: 200 }} />
+                    </a>
+                  </CardAvatar>
 
-      {state.events.map((item, key) => {
-        return (
-          <GridItem xs={12} sm={12} md={4} key={item.eventId}>
-            <EventCard event={item} />
-          </GridItem>
-        );
-      })}
-    </GridContainer>
+                  <p className={classes.cardDescription}>
+                    Manage your wedding.
+                  </p>
+                  <Button
+                    round
+                    color="rose"
+                    onClick={() => {
+                      history.push("/dashboard");
+                    }}
+                  >
+                    HOME
+                  </Button>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </GridItem>
+      </GridContainer>
+    </div>
   );
 }
 
