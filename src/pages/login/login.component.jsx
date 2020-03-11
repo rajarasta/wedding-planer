@@ -1,57 +1,66 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 // Redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/userActions";
 
-// Router
-import { withRouter } from "react-router-dom";
+// Router stuff
+import { withRouter, Link } from "react-router-dom";
 
-// @material-ui/core components
+// MUI components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
-// @material-ui/icons
+// MUI icons
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/Lock";
 
-// import LockOutline from "@material-ui/icons/LockOutline";
-
-// core components
+// Theme components
 import GridContainer from "../../components/Grid/GridContainer.js";
 import GridItem from "../../components/Grid/GridItem.js";
-import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardHeader from "../../components/Card/CardHeader.js";
-import CardFooter from "../../components/Card/CardFooter.js";
 
+// CSS and style
 import styles from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
-
+import customStyles from "../../assets/jss/customStyles";
 import lock from "../../assets/pictures/lock.jpeg";
 
-const useStyles = makeStyles(styles);
+const useStyles = makeStyles(theme => {
+  return {
+    ...styles(theme),
+    ...customStyles
+  };
+});
 
-function LoginPage({ history }) {
-  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+// COMPONENT
+function Login({ history }) {
+  // Styles
+  const classes = useStyles();
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
-  const classes = useStyles();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  // Redux
   const state = useSelector(state => {
     return {
       user: state.user,
-      UI: state.UI
+      UI: state.UI,
+      errors: state.UI.errors
     };
   });
 
   const dispatch = useDispatch();
+
+  // Local state
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleLogin(event) {
     event.preventDefault();
@@ -62,6 +71,7 @@ function LoginPage({ history }) {
     dispatch(loginUser(userData, history));
   }
 
+  // Return
   return (
     <div
       style={{
@@ -101,67 +111,70 @@ function LoginPage({ history }) {
                   </div>
                 </CardHeader>
                 <CardBody>
-                  <CustomInput
-                    labelText="Email"
+                  <TextField
                     id="email"
-                    formControlProps={{
-                      fullWidth: true
+                    name="email"
+                    type="email"
+                    label="Email"
+                    className={classes.textField}
+                    helperText={state.errors.email}
+                    error={state.errors.email ? true : false}
+                    value={email}
+                    onChange={e => {
+                      setEmail(e.target.value);
                     }}
-                    inputProps={{
-                      value: email,
-                      onChange: e => {
-                        setEmail(e.target.value);
-                      },
+                    InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />
                         </InputAdornment>
                       )
                     }}
+                    fullWidth
                   />
-                  <CustomInput
-                    labelText="Password"
+                  <TextField
                     id="password"
-                    formControlProps={{
-                      fullWidth: true
+                    name="password"
+                    type="password"
+                    label="Password"
+                    className={classes.textField}
+                    helperText={state.errors.password}
+                    error={state.errors.password ? true : false}
+                    value={password}
+                    onChange={e => {
+                      setPassword(e.target.value);
                     }}
-                    inputProps={{
-                      value: password,
-                      onChange: e => {
-                        setPassword(e.target.value);
-                      },
+                    InputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
                           <Lock className={classes.inputAdornmentIcon}></Lock>
                         </InputAdornment>
-                      ),
-                      type: "password",
-                      autoComplete: "off"
+                      )
                     }}
+                    fullWidth
                   />
-                </CardBody>
-                <CardFooter className={classes.justifyContentCenter}>
+                  {state.errors.message && (
+                    <Typography variant="body2" className={classes.customError}>
+                      {state.errors.message}
+                    </Typography>
+                  )}
                   <Button
                     color="rose"
-                    simple
-                    size="lg"
+                    variant="contained"
                     onClick={e => handleLogin(e)}
+                    className={classes.button}
                     block
                   >
                     Log In
+                    {state.UI.loading && (
+                      <CircularProgress className={classes.progress} />
+                    )}
                   </Button>
-                  <Button
-                    color="rose"
-                    simple
-                    size="lg"
-                    onClick={() => {
-                      history.push("/signup");
-                    }}
-                    block
-                  >
-                    Register
-                  </Button>
-                </CardFooter>
+                  <br />
+                  <small>
+                    <Link to="/signup">Don't have an account? </Link>
+                  </small>
+                </CardBody>
               </Card>
             </form>
           </GridItem>
@@ -171,4 +184,4 @@ function LoginPage({ history }) {
   );
 }
 
-export default withRouter(LoginPage);
+export default withRouter(Login);

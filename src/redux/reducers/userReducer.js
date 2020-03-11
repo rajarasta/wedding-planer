@@ -3,11 +3,11 @@ import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED } from "../types";
 const initialState = {
   authenticated: false,
   credentials: {},
-  likes: [],
+  events: [],
   notifications: []
 };
 
-const userReducer = (state = initialState, action) => {
+export default function(state = initialState, action) {
   switch (action.type) {
     case SET_AUTHENTICATED:
       return {
@@ -24,6 +24,4 @@ const userReducer = (state = initialState, action) => {
     default:
       return state;
   }
-};
-
-export default userReducer;
+}

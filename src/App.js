@@ -14,7 +14,8 @@ import { BrowserRouter } from "react-router-dom";
 // Pages and routes
 import HomePage from "./pages/home-page.component";
 import WeddingPage from "./pages/wedding-page/wedding-page.component";
-import LoginPage from "./pages/login-page/login-page.component";
+import Login from "./pages/login/login.component";
+import Signup from "./pages/signup/signup.component";
 import Dashboard from "./pages/dashboard-page/dashboard.component";
 import Guests from "./pages/guests/guests.components";
 import AddGuestPage from "./pages/add-guest-page/add-guest-page.components";
@@ -33,7 +34,7 @@ if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
     store.dispatch(logoutUser());
-    window.location.href = "/login-page";
+    window.location.href = "/login";
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
     axios.defaults.headers.common["Authorization"] = token;

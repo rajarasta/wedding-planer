@@ -108,7 +108,11 @@ exports.login = (req, res) => {
       console.error(err);
       if (err.code === "auth/wrong-password") {
         return res.status(403).json({
-          general: "Wrong credentials. Please try again."
+          message: "Wrong credentials. Please try again."
+        });
+      } else if (err.code === "auth/user-not-found") {
+        return res.status(403).json({
+          message: "Wrong credentials. Please try again."
         });
       } else {
         return res.status(500).json({
@@ -166,7 +170,10 @@ exports.addUserDetails = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      return res.status(500).json({ error: err.code });
+      return res.status(500).json({
+        error: err.code,
+        message: "Something went wrong while fetching user data."
+      });
     });
 };
 
@@ -184,7 +191,7 @@ exports.uploadImage = (req, res) => {
 
   busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
     if (mimetype !== "image/jpeg" && mimetype !== "image/png") {
-      errorMessage =
+      let errorMessage =
         "Wrong image type submitted. Please upload an image in .jpeg or .png format.";
       console.error(`Error: ${errorMessage}`);
       return res.status(400).json({ error: errorMessage });

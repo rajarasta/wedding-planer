@@ -23,8 +23,10 @@ exports.getEvent = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      if (err.message == "Not found") {
-        return res.status(404).json({ error: "Not found" });
+      if (err.message === "Not found") {
+        return res
+          .status(404)
+          .json({ error: "Not found", message: "Event not found." });
       }
       return res.status(500).json({
         error: err.code,
@@ -100,7 +102,10 @@ exports.createEvent = (req, res) => {
           .status(400)
           .json({ error: err.code, message: "This slug is already taken." });
       } else {
-        return res.status(500).json({ error: err.code });
+        return res.status(500).json({
+          error: err.code,
+          message: "Something went wrong while fetching event list."
+        });
       }
     });
 };
