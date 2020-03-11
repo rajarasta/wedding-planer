@@ -27,7 +27,7 @@ exports.getGuest = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      if (err.message == "Not found") {
+      if (err.message === "Not found") {
         return res.status(404).json({ error: "Not found" });
       }
       return res.status(500).json({
@@ -38,7 +38,7 @@ exports.getGuest = (req, res) => {
 };
 
 exports.getAllGuests = (req, res) => {
-  console.log(res, req, "Pozvan getAllGuests")
+  console.log(res, req, "Pozvan getAllGuests");
   let guests = [];
 
   // Fetch the event
@@ -70,11 +70,11 @@ exports.getAllGuests = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      if (err.message == "Not found") {
+      if (err.message === "Not found") {
         return res
           .status(404)
           .json({ error: err.code, message: "Event not found" });
-      } else if (err.message == "Not authorized") {
+      } else if (err.message === "Not authorized") {
         return res.status(404).json({
           error: err.code,
           message: "Not authorized to access that event."
@@ -213,7 +213,7 @@ exports.getInvitation = (req, res) => {
     })
     .catch(err => {
       console.error(err);
-      if (err.message == "Not found") {
+      if (err.message === "Not found") {
         return res.status(404).json({ error: "Not found" });
       }
       return res.status(500).json({

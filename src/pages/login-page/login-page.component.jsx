@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
+// Redux stuff
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../redux/actions/userActions";
+
+// Router
+import { withRouter } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 import Lock from "@material-ui/icons/Lock";
 
@@ -26,16 +32,36 @@ import styles from "../../assets/jss/material-dashboard-pro-react/views/loginPag
 
 import lock from "../../assets/pictures/lock.jpeg";
 
-import { withRouter } from "react-router-dom";
-
 const useStyles = makeStyles(styles);
 
 function LoginPage({ history }) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const state = useSelector(state => {
+    return {
+      user: state.user,
+      UI: state.UI
+    };
+  });
+
+  const dispatch = useDispatch();
+
+  function handleLogin(event) {
+    event.preventDefault();
+    const userData = {
+      email: email,
+      password: password
+    };
+    dispatch(loginUser(userData, history));
+  }
+
   return (
     <div
       style={{
@@ -76,26 +102,16 @@ function LoginPage({ history }) {
                 </CardHeader>
                 <CardBody>
                   <CustomInput
-                    labelText="First Name.."
-                    id="firstname"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Face className={classes.inputAdornmentIcon} />
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                  <CustomInput
-                    labelText="Email..."
+                    labelText="Email"
                     id="email"
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
+                      value: email,
+                      onChange: e => {
+                        setEmail(e.target.value);
+                      },
                       endAdornment: (
                         <InputAdornment position="end">
                           <Email className={classes.inputAdornmentIcon} />
@@ -110,6 +126,10 @@ function LoginPage({ history }) {
                       fullWidth: true
                     }}
                     inputProps={{
+                      value: password,
+                      onChange: e => {
+                        setPassword(e.target.value);
+                      },
                       endAdornment: (
                         <InputAdornment position="end">
                           <Lock className={classes.inputAdornmentIcon}></Lock>
@@ -125,12 +145,21 @@ function LoginPage({ history }) {
                     color="rose"
                     simple
                     size="lg"
+                    onClick={e => handleLogin(e)}
+                    block
+                  >
+                    Log In
+                  </Button>
+                  <Button
+                    color="rose"
+                    simple
+                    size="lg"
                     onClick={() => {
-                      history.push("/home-page");
+                      history.push("/signup");
                     }}
                     block
                   >
-                    Let{"'"}s Go
+                    Register
                   </Button>
                 </CardFooter>
               </Card>

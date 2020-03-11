@@ -33,7 +33,7 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import styles from "../../assets/jss/material-dashboard-pro-react/views/validationFormsStyle.js";
 
 //Firebase
-import {firestore} from "../../firebase/firebase.utils.js";
+// import {firestore} from "../../firebase/firebase.utils.js";
 
 const useStyles = makeStyles(styles);
 
@@ -82,7 +82,7 @@ export default function ValidationForms() {
   const [minValueState, setminValueState] = React.useState("");
   const [maxValue, setmaxValue] = React.useState("");
   const [maxValueState, setmaxValueState] = React.useState("");
-  
+
   //Saves accomodation value for future use
   const [accomodationValue, setaccomodationValue] = React.useState("");
 
@@ -114,7 +114,7 @@ export default function ValidationForms() {
   const handleSimple = event => {
     setSimpleSelect(event.target.value);
     console.log(event.target.value);
-    setaccomodationValue(event.target.value)
+    setaccomodationValue(event.target.value);
   };
   // verifies if value is a valid URL
   const verifyUrl = value => {
@@ -144,21 +144,20 @@ export default function ValidationForms() {
     }
 
     const guestRef = event.target.elements;
-    var guestReference = firestore.collection("guests").doc()
-    const dateTime = Date()
+    var guestReference; // = firestore.collection("guests").doc()
+    const dateTime = Date();
 
     guestReference.set({
-        firstname: guestRef.firstName.value,
-        lastName: guestRef.lastName.value,
-        phone: guestRef.phone.value,
-        eMail: guestRef.eMail.value,
-        additionalAdults: guestRef.additionalAdults.value,
-        additionalChildren: guestRef.additionalChildren.value,
-        accomodation: accomodationValue,
-        reference: guestReference.id,
-        dateAdded: dateTime
+      firstname: guestRef.firstName.value,
+      lastName: guestRef.lastName.value,
+      phone: guestRef.phone.value,
+      eMail: guestRef.eMail.value,
+      additionalAdults: guestRef.additionalAdults.value,
+      additionalChildren: guestRef.additionalChildren.value,
+      accomodation: accomodationValue,
+      reference: guestReference.id,
+      dateAdded: dateTime
     });
-
   };
   const loginClick = () => {
     if (loginEmailState === "") {
