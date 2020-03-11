@@ -21,6 +21,7 @@ import Guests from "../../pages/guests/guests.components";
 import AddGuestPage from "../../pages/add-guest-page/add-guest-page.components";
 import TimelinePage from "../../pages/TimelinePage/TimelinePage.js";
 import TimelineOverviewPage from "../../pages/TimelineOverview/TimelineOverviewPage";
+import RegisterPage from '../../pages/RegisterPage/RegisterPage.js';
 
 //Router
 import {withRouter} from "react-router-dom";
@@ -103,6 +104,7 @@ function DashboardLayout(props) {
               <Route exact path="/dashboard" component={Dashboard} />
               <Route exact path="/guests" component={Guests} />
               <Route exact path="/add-guest-page" component={AddGuestPage} />
+              <Route exact path="/signup" component={RegisterPage} />
             </Switch>
           </div>
         </div>
