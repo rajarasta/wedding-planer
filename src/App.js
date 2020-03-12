@@ -31,6 +31,11 @@ import { createBrowserHistory } from "history";
 // Pages and routes
 import HomeDashboard from "./layouts/HomeDashboard/HomeDashboard.js";
 import Auth from "./layouts/Auth/Auth.js";
+/*
+import Home from "./pages/Home/Home";
+import Login from "./pages/Login/Login";
+import AuthRoute from "./components/AuthRoute";
+*/
 
 // Authentication
 import axios from "axios";
@@ -49,13 +54,13 @@ if (token) {
   }
 }
 // End of Authentication
-const hist = createBrowserHistory();
+const history = createBrowserHistory();
 //TODO: correct back to what it was after timeline was solved
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <div className="App">
-        <Router history={hist}>
+        <Router history={history}>
           <Switch>
             <Route path="/auth" component={Auth} />
             <Route path="/home-dashboard" component={HomeDashboard} />

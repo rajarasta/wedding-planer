@@ -8,7 +8,7 @@ ver0.2 Josip Rastočić
 import React from "react";
 
 // Router stuff
-import { useHistory, withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -106,9 +106,9 @@ export default function EventCard(props) {
   } = props.event;
 
   return (
-    <Card profile>
+    <Card>
       <CardMedia image={avatar} style={{ height: 200 }} />
-      <CardContent profile>
+      <CardContent>
         <Typography variant="h5" className={classes.cardCategory}>
           {name}
         </Typography>
@@ -126,9 +126,9 @@ export default function EventCard(props) {
           Confirmed guests: {confirmedGuests}
         </Typography>
         <Button
-          round
           variant="contained"
           color="secondary"
+          className={classes.button}
           onClick={() => {
             history.push(`/home-dashboard/event/${slug}`); //Changed push link for top level layout logic
           }}

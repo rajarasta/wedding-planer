@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/userActions";
 
 // Router stuff
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,9 +39,11 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-export default function Login({ history }) {
+export default function Login(props) {
   // Styles
   const classes = useStyles();
+  // History
+  const history = useHistory();
   setTimeout(function() {
     setCardAnimation("");
   }, 700);

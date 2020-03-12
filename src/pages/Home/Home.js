@@ -1,106 +1,32 @@
-import React, { useState } from "react";
+/*
+v.0.1. Igor
+- Removed dummy/hard-programmed event card and added "add event" buttom
+- Cleaned up imports
+*/
+
+import React from "react";
 
 // Redux stuff
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+
+// Rotuer stuff
+import { useHistory } from "react-router-dom";
 
 // Main components
 import EventCard from "../../components/EventCard";
 
 // MUI components
-import { makeStyles } from "@material-ui/core/styles";
+import { Fab } from "@material-ui/core";
 
 // MUI icons
 
 // Theme components
 import GridContainer from "../../components/Grid/GridContainer.js";
 import GridItem from "../../components/Grid/GridItem.js";
-import Card from "../../components/Card/Card.js";
-import CardBody from "../../components/Card/CardBody.js";
-import Button from "../../components/CustomButtons/Button.js";
-import CardAvatar from "../../components/Card/CardAvatar";
-
-// Images
-import background from "../../assets/pictures/backround.jpg";
-import avatar from "../../assets/pictures/mirna_i_antonio.jpg";
-
-// CSS and style
-import {
-  cardTitle,
-  roseColor
-} from "../../assets/jss/material-dashboard-pro-react.js";
-import customStyles from "../../assets/jss/customStyles";
-
-const styles = {
-  cardTitle,
-  cardTitleWhite: {
-    ...cardTitle,
-    color: "#FFFFFF",
-    marginTop: "0"
-  },
-  cardCategoryWhite: {
-    margin: "0",
-    color: "rgba(255, 255, 255, 0.8)",
-    fontSize: ".875rem"
-  },
-  cardCategory: {
-    color: "#999999",
-    marginTop: "10px"
-  },
-  icon: {
-    color: "#333333",
-    margin: "10px auto 0",
-    width: "130px",
-    height: "130px",
-    border: "1px solid #E5E5E5",
-    borderRadius: "50%",
-    lineHeight: "174px",
-    "& svg": {
-      width: "55px",
-      height: "55px"
-    },
-    "& .fab,& .fas,& .far,& .fal,& .material-icons": {
-      width: "55px",
-      fontSize: "55px"
-    }
-  },
-  iconRose: {
-    color: roseColor
-  },
-  marginTop30: {
-    marginTop: "30px"
-  },
-  testimonialIcon: {
-    marginTop: "30px",
-    "& svg": {
-      width: "40px",
-      height: "40px"
-    }
-  },
-  cardTestimonialDescription: {
-    fontStyle: "italic",
-    color: "#999999"
-  },
-  homePage: {
-    backgroundImage: `url(${background})`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: 800
-  }
-};
-
-const useStyles = makeStyles(theme => {
-  return {
-    ...styles,
-    ...customStyles
-  };
-});
 
 // COMPONENT
-export default function Home({ history }) {
-  // Styles
-  const classes = useStyles();
-
+export default function Home(props) {
+  const history = useHistory();
   // Redux
   const state = useSelector(state => {
     return {
@@ -110,44 +36,26 @@ export default function Home({ history }) {
     };
   });
 
-  const dispatch = useDispatch();
-
   return (
     <GridContainer>
-      <GridItem xs={12} sm={12} md={4}>
-        <Card profile>
-          <CardBody profile>
-            <h6 className={classes.cardCategory}>MIRNA I ANTONIO</h6>
-
-            <h3 className={`${classes.cardTitle} ${classes.marginTop30}`}>
-              WEDDING
-            </h3>
-            <CardAvatar>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." style={{ height: 200 }} />
-              </a>
-            </CardAvatar>
-            <p className={classes.cardDescription}>Manage your wedding.</p>
-            <Button
-              round
-              color="rose"
-              onClick={() => {
-                history.push("/home-dashboard/guests");
-              }}
-            >
-              HOME
-            </Button>
-          </CardBody>
-        </Card>
-      </GridItem>
-
-      {state.events.map((item, key) => {
+      {state.events.map(item => {
         return (
           <GridItem xs={12} sm={12} md={4} key={item.eventId}>
-            <EventCard event={item} history={history}/>
+            <EventCard event={item} history={history} />
           </GridItem>
         );
       })}
+      <Fab
+        style={{ position: "fixed", bottom: "3rem", right: "3rem" }}
+        color="secondary"
+        onClick={() => {
+          console.log(history);
+          history.push("/home-dashboard/event/add");
+          console.log(history);
+        }}
+      >
+        +
+      </Fab>
     </GridContainer>
   );
 }

@@ -92,7 +92,7 @@ var routes = [
   {
     // Has to be last in the "event" tree of routes
     // Must be false to pick up all routes for this event as a fallback
-    exact: false,
+    exact: true,
     // Fallback to main event dashboard
     // TODO Make event dashboard or add apropriate component
     path: "/event/:eventId/",
@@ -110,7 +110,7 @@ var routes = [
     layout: "/home-dashboard"
   },
   {
-    exact: false,
+    exact: true,
     path: "/signup",
     name: "Signup",
     icon: Image,
