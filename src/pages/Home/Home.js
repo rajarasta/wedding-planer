@@ -144,7 +144,7 @@ export default function Home({ history }) {
       {state.events.map((item, key) => {
         return (
           <GridItem xs={12} sm={12} md={4} key={item.eventId}>
-            <EventCard event={item} history={history} />
+            <EventCard event={item} history={history}/>
           </GridItem>
         );
       })}

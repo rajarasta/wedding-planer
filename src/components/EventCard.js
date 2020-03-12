@@ -1,3 +1,10 @@
+/*
+ver0.1 Igor Pavlović
+ver0.2 Josip Rastočić
+-changed links so they work with top level layout logic
+
+*/
+
 import React from "react";
 
 // Router stuff
@@ -82,11 +89,11 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-function EventCard(props) {
+export default function EventCard(props) {
   // Styles
   const classes = useStyles();
   // Router
-  //const history = useHistory();
+  const history = useHistory();
 
   // Props
   const {
@@ -123,8 +130,7 @@ function EventCard(props) {
           variant="contained"
           color="secondary"
           onClick={() => {
-            console.log(props.match)
-            props.history.push(`/home-dashboard/event/${slug}`);
+            history.push(`/home-dashboard/event/${slug}`); //Changed push link for top level layout logic
           }}
         >
           Edit
@@ -133,5 +139,3 @@ function EventCard(props) {
     </Card>
   );
 }
-
-export default withRouter(EventCard);

@@ -1,6 +1,7 @@
 /*
 v.0.1.
 - getRoutes updated with additional prop of "exact = true|false"
+v.0.2 changed path naming for top level layout logic
 */
 import React from "react";
 import cx from "classnames";
@@ -103,11 +104,10 @@ function HomeDashboard(props) {
   const getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/home-dashboard") {
-        console.log(prop.layout + prop.path)
         return (
           <Route
             exact={prop.exact}
-            path={prop.layout + prop.path}
+            path={prop.layout + prop.path} //Changed from {prop.path} so it works with layout logic
             component={prop.component}
             key={key}
           />

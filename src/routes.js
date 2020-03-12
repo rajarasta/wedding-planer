@@ -7,6 +7,9 @@ ver 0.2 Igor Pavlović
 - renamed page components to more readable names
 - adjusted routes accordingly
 
+ver 0.3 Josip Rastočić
+-changed layout naming so it works with top level layouts
+
 
 TODO: Routes ver 0.2 - solve login and register logic in single separate layout
 TODO: Routes ver 0.3 - solve invitaion with :invitationID

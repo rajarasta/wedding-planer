@@ -1,3 +1,9 @@
+/**
+ ver0.1
+ -Adjusted so it works with top level layout logic
+ -Removed pieces of obsolite code
+ */
+
 import React from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
@@ -33,9 +39,8 @@ function Pages(props) {
   });
   const getRoutes = routes => {
     return routes.map((prop, key) => {
+      //Removed obsolete code
       if (prop.layout === "/auth") {
-        console.log(prop.layout + prop.path);
-        console.log("ode");
         return (
           <Route
             exact={prop.exact}
@@ -52,7 +57,7 @@ function Pages(props) {
   const getBgImage = () => {
     if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
       return register;
-    } else if (window.location.pathname.indexOf("/auth") !== -1) {
+    } else if (window.location.pathname.indexOf("/auth") !== -1) { //Fixed links for bcg images
       return login;
     } else if (window.location.pathname.indexOf("/auth/pricing-page") !== -1) {
       return pricing;
@@ -91,7 +96,7 @@ function Pages(props) {
           className={classes.fullPage}
           style={{ backgroundImage: "url(" + getBgImage() + ")" }}
         >
-          <Switch>
+          <Switch> 
             {getRoutes(routes)}
             <Redirect from="/auth" to="auth/login" />
           </Switch>
