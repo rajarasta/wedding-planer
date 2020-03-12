@@ -1,3 +1,8 @@
+/**ver 0.1 Josip Rastočić
+ * - changed starting app position to auth layout
+ *
+ */
+
 import React from "react";
 import "./App.css";
 import "../src/assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
@@ -9,21 +14,15 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 //Router
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Router } from "react-router-dom";
 
 // Pages and routes
-import HomePage from "./pages/home-page.component";
-import WeddingPage from "./pages/wedding-page/wedding-page.component";
-import Login from "./pages/login/login.component";
-import Signup from "./pages/signup/signup.component";
-import Dashboard from "./pages/dashboard-page/dashboard.component";
-import Guests from "./pages/guests/guests.components";
-import AddGuestPage from "./pages/add-guest-page/add-guest-page.components";
-import TimelinePage from "./pages/TimelinePage/TimelinePage.js";
 import HomeDashboard from "./layouts/HomeDashboard/HomeDashboard.js";
+import Auth from "./layouts/Auth/Auth.js";
 
 //React Router for page navigation imports
 import { Switch, Route, Redirect } from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 // Authentication
 import axios from "axios";
@@ -43,13 +42,21 @@ if (token) {
 }
 // End of Authentication
 
+const hist = createBrowserHistory();
 //TODO: correct back to what it was after timeline was solved
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <div className="App">
-          <HomeDashboard />
+          <Router history={hist}>
+            <Switch>
+              <Route path="/auth" component={Auth} />
+              <Route path="/home-dashboard" component={HomeDashboard} />
+              <Redirect from="/" to="/auth/login-page" />
+              <Redirect from="/home-dashboard" to="/home-dashboard/home-page" />
+            </Switch>
+          </Router>
         </div>
       </BrowserRouter>
     </Provider>

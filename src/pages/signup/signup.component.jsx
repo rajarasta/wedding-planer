@@ -78,14 +78,6 @@ function Signup({ history }) {
 
   // Return
   return (
-    <div
-      style={{
-        backgroundImage: "url(" + lock + ")",
-        backgroundSize: "cover",
-        width: "100%",
-        height: "100vh"
-      }}
-    >
       <div className={classes.container}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={6} md={4}>
@@ -212,7 +204,7 @@ function Signup({ history }) {
                   </Button>
                   <br />
                   <small>
-                    <Link to="/login">Already registered? </Link>
+                    <Link to="/auth/login">Already registered? </Link>
                   </small>
                 </CardBody>
               </Card>
@@ -220,7 +212,6 @@ function Signup({ history }) {
           </GridItem>
         </GridContainer>
       </div>
-    </div>
   );
 }
 

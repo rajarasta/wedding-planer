@@ -122,7 +122,7 @@ export default function EventCard(props) {
           variant="contained"
           color="secondary"
           onClick={() => {
-            history.push("/dashboard");
+            history.push("/home-dashboard/guests");
           }}
         >
           Edit

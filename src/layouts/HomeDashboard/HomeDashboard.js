@@ -87,9 +87,7 @@ function HomeDashboard(props) {
           return collapseActiveRoute;
         }
       } else {
-        if (
-          window.location.href.indexOf(routes[i].path) !== -1
-        ) {
+        if (window.location.href.indexOf(routes[i].path) !== -1) {
           return routes[i].name;
         }
       }
@@ -101,7 +99,13 @@ function HomeDashboard(props) {
     return routes.map((prop, key) => {
       if (prop.layout === "/home-dashboard") {
         console.log(prop.path);
-        return <Route path={prop.path} component={prop.component} key={key} />;
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            component={prop.component}
+            key={key}
+          />
+        );
       } else {
         return null;
       }
@@ -119,11 +123,10 @@ function HomeDashboard(props) {
         <div className={classes.content}>
           <div className={classes.container}>
             <Switch>
-              {getRoutes(routes)}
-              <Redirect from="/admin" to="/admin/dashboard" />
+              {getRoutes(routes)}/>
+              <Redirect from="/home-dashboard" to="/home-dashboard/home-page" />
             </Switch>
           </div>
-          
         </div>
         <Footer fluid />
       </div>

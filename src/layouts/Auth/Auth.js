@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AuthNavbar from "../../components/Navbars/AuthNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 
-import routes from "routes.js";
+import routes from "../../routes";
 
 import styles from "../../assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
 
@@ -17,6 +17,7 @@ import login from "../../assets/img/login.jpeg";
 import lock from "../../assets/img/lock.jpeg";
 import error from "../../assets/img/clint-mckoy.jpg";
 import pricing from "../../assets/img/bg-pricing.jpeg";
+import HomeDashboard from "../HomeDashboard/HomeDashboard.js";
 
 const useStyles = makeStyles(styles);
 
@@ -37,6 +38,7 @@ export default function Pages(props) {
         return getRoutes(prop.views);
       }
       if (prop.layout === "/auth") {
+        console.log(prop.path)
         return (
           <Route
             path={prop.layout + prop.path}
@@ -50,7 +52,7 @@ export default function Pages(props) {
     });
   };
   const getBgImage = () => {
-    if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
+    if (window.location.pathname.indexOf("/auth/signup") !== -1) {
       return register;
     } else if (window.location.pathname.indexOf("/auth/login-page") !== -1) {
       return login;
@@ -64,7 +66,7 @@ export default function Pages(props) {
       return error;
     }
   };
-  
+
   const getActiveRoute = routes => {
     let activeRoute = "Default Brand Text";
     for (let i = 0; i < routes.length; i++) {
@@ -93,7 +95,7 @@ export default function Pages(props) {
         >
           <Switch>
             {getRoutes(routes)}
-            <Redirect from="/auth" to="/auth/login-page" />
+            <Redirect from="/" to="/auth/login-page" />
           </Switch>
           <Footer white />
         </div>

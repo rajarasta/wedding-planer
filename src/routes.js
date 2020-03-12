@@ -4,8 +4,9 @@
 
 
 TODO: Routes ver 0.2 - solve login and register logic in single separate layout
-TODO: Routes ver 0.3 - solve invitaion with :invitationID
+-changed layout for login and register to /auth
 
+TODO: Routes ver 0.3 - solve invitaion with :invitationID
 
 */
 /* 
@@ -74,18 +75,18 @@ var routes = [
     layout: "/home-dashboard"
   },
   {
-    path: "/",
+    path: "/login-page",
     name: "Login",
     icon: Image,
     component: Login,
-    layout: "/home-dashboard"
+    layout: "/auth"
   },
   {
     path: "/signup",
     name: "Signup",
     icon: Image,
     component: Signup,
-    layout: "/home-dashboard"
+    layout: "/auth"
   }
 
 ];

@@ -137,7 +137,7 @@ function HomePage({ history }) {
               round
               color="rose"
               onClick={() => {
-                history.push("/dashboard");
+                history.push("/home-dashboard/guests");
               }}
             >
               HOME
@@ -149,7 +149,7 @@ function HomePage({ history }) {
       {state.events.map((item, key) => {
         return (
           <GridItem xs={12} sm={12} md={4} key={item.eventId}>
-            <EventCard event={item} />
+            <EventCard event={item} history={history}/>
           </GridItem>
         );
       })}
