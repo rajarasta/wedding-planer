@@ -29,7 +29,7 @@ import {
 import { createBrowserHistory } from "history";
 
 // Pages and routes
-import HomeDashboard from "./layouts/HomeDashboard/HomeDashboard.js";
+import Dashboard from "./layouts/Dashboard/Dashboard.js";
 import Auth from "./layouts/Auth/Auth.js";
 /*
 import Home from "./pages/Home/Home";
@@ -46,7 +46,7 @@ if (token) {
   const decodedToken = jwtDecode(token);
   if (decodedToken.exp * 1000 < Date.now()) {
     store.dispatch(logoutUser());
-    window.location.href = "/login";
+    window.location.href = "/auth/login";
   } else {
     store.dispatch({ type: SET_AUTHENTICATED });
     axios.defaults.headers.common["Authorization"] = token;
@@ -63,7 +63,7 @@ const App = () => (
         <Router history={history}>
           <Switch>
             <Route path="/auth" component={Auth} />
-            <Route path="/home-dashboard" component={HomeDashboard} />
+            <Route path="/dashboard" component={Dashboard} />
             <Redirect from="/" to="/auth/login" />
           </Switch>
         </Router>

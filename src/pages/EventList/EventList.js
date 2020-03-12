@@ -25,7 +25,7 @@ import GridContainer from "../../components/Grid/GridContainer.js";
 import GridItem from "../../components/Grid/GridItem.js";
 
 // COMPONENT
-export default function Home(props) {
+export default function EventList(props) {
   const history = useHistory();
   // Redux
   const state = useSelector(state => {
@@ -50,7 +50,7 @@ export default function Home(props) {
         color="secondary"
         onClick={() => {
           console.log(history);
-          history.push("/home-dashboard/event/add");
+          history.push(`${history.pathname}/event/add`);
           console.log(history);
         }}
       >

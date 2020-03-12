@@ -2,6 +2,8 @@
 v.0.1.
 - getRoutes updated with additional prop of "exact = true|false"
 v.0.2 changed path naming for top level layout logic
+v.0.2.1 cleaned up components, removed test values for Redux
+
 */
 import React from "react";
 import cx from "classnames";
@@ -16,9 +18,7 @@ import routes from "../../routes";
 
 // Components
 import AdminNavbar from "../../components/Navbars/AdminNavbar";
-import AdminNavbarLinks from "../../components/Navbars/AdminNavbarLinks";
 import Footer from "../../components/Footer/Footer";
-import FixedPlugin from "../../components/FixedPlugin/FixedPlugin";
 
 // Scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
@@ -39,10 +39,7 @@ function HomeDashboard(props) {
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [miniActive, setMiniActive] = React.useState(false);
-  const [color, setColor] = React.useState("blue");
-  const [bgColor, setBgColor] = React.useState("black");
-  // const [hasImage, setHasImage] = React.useState(true);
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown");
+
   // styles
   const classes = useStyles();
   const mainPanelClasses =
@@ -53,12 +50,12 @@ function HomeDashboard(props) {
       [classes.mainPanelWithPerfectScrollbar]:
         navigator.platform.indexOf("Win") > -1
     });
+
   // ref for main panel div
   const mainPanel = React.createRef();
+
   // effect instead of componentDidMount, componentDidUpdate and componentWillUnmount
   React.useEffect(() => {
-    setTestValue("jedan");
-
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -103,7 +100,7 @@ function HomeDashboard(props) {
   // Refactored getRoutes to have "exact" prop as well (true|false), this will be important with parametric URLs
   const getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/home-dashboard") {
+      if (prop.layout === "/dashboard") {
         return (
           <Route
             exact={prop.exact}
@@ -130,7 +127,7 @@ function HomeDashboard(props) {
           <div className={classes.container}>
             <Switch>
               {getRoutes(routes)}
-              <Redirect from="/home-dashboard" to="/home-dashboard/home"/>
+              <Redirect from="/dashboard" to="/dashboard/event" />
             </Switch>
           </div>
         </div>

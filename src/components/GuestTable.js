@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getAllGuests } from "../redux/actions/eventActions";
 
 // Router stuff
-import { useHistory, Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // MUI stuff
 import { makeStyles } from "@material-ui/core/styles";
@@ -32,8 +32,9 @@ const useStyles = makeStyles({
 });
 
 export default function GuestTable(props) {
+  // Styles
   const classes = useStyles();
-  const history = useHistory();
+  // Props
   let { eventId } = useParams();
 
   // Redux

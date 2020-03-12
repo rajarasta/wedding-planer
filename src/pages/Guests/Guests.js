@@ -6,14 +6,13 @@ import React from "react";
 
 // MUI stuff
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Fab, Button } from "@material-ui/core";
+import { Typography, Fab } from "@material-ui/core";
 
 // Components
 import NavPills from "../../components/NavPills/NavPills.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import ExtendedTable from "../../components/ExtendedTable/ExtendedTable";
 import GuestTable from "../../components/GuestTable";
 
 // CSS and styles
@@ -58,15 +57,11 @@ export default function Guests({ history }) {
               },
               {
                 tabButton: "Responses",
-                tabContent: (
-                  <span>
-                    <ExtendedTable />
-                  </span>
-                )
+                tabContent: <span>Responses</span>
               },
               {
                 tabButton: "Unresponded",
-                tabContent: <span>Alright</span>
+                tabContent: <span>Unresponded</span>
               }
             ]}
           />

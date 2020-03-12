@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { signupUser } from "../../redux/actions/userActions";
 
 // Router stuff
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,7 +29,6 @@ import CardHeader from "../../components/Card/CardHeader.js";
 // CSS and style
 import styles from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 import customStyles from "../../assets/jss/customStyles";
-import lock from "../../assets/pictures/lock.jpeg";
 
 const useStyles = makeStyles(theme => {
   return {
@@ -78,139 +77,139 @@ export default function Signup({ history }) {
 
   // Return
   return (
-      <div className={classes.container}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={6} md={4}>
-            <form>
-              <Card login className={classes[cardAnimaton]}>
-                <CardHeader
-                  className={`${classes.cardHeader} ${classes.textCenter}`}
+    <div className={classes.container}>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={6} md={4}>
+          <form>
+            <Card login className={classes[cardAnimaton]}>
+              <CardHeader
+                className={`${classes.cardHeader} ${classes.textCenter}`}
+                color="rose"
+              >
+                <h4 className={classes.cardTitle}>Log in</h4>
+                <div className={classes.socialLine}>
+                  {[
+                    "fab fa-facebook-square",
+                    "fab fa-twitter",
+                    "fab fa-google-plus"
+                  ].map((prop, key) => {
+                    return (
+                      <Button
+                        color="transparent"
+                        justIcon
+                        key={key}
+                        className={classes.customButtonClass}
+                      >
+                        <i className={prop} />
+                      </Button>
+                    );
+                  })}
+                </div>
+              </CardHeader>
+              <CardBody>
+                <TextField
+                  id="userHandle"
+                  name="userHandle"
+                  type="text"
+                  label="Username"
+                  fullWidth
+                  className={classes.textField}
+                  helperText={state.errors.userHandle}
+                  error={state.errors.userHandle ? true : false}
+                  value={userHandle}
+                  onChange={e => {
+                    setUserHandle(e.target.value);
+                  }}
+                />
+                <TextField
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  className={classes.textField}
+                  helperText={state.errors.email}
+                  error={state.errors.email ? true : false}
+                  value={email}
+                  onChange={e => {
+                    setEmail(e.target.value);
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Email className={classes.inputAdornmentIcon} />
+                      </InputAdornment>
+                    )
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  id="password"
+                  name="password"
+                  type="password"
+                  label="Password"
+                  fullWidth
+                  className={classes.textField}
+                  helperText={state.errors.password}
+                  error={state.errors.password ? true : false}
+                  value={password}
+                  onChange={e => {
+                    setPassword(e.target.value);
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Lock className={classes.inputAdornmentIcon}></Lock>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+                <TextField
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  label="Confirm password"
+                  fullWidth
+                  className={classes.textField}
+                  helperText={state.errors.confirmPassword}
+                  error={state.errors.confirmPassword ? true : false}
+                  value={confirmPassword}
+                  onChange={e => {
+                    setConfirmPassword(e.target.value);
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Lock className={classes.inputAdornmentIcon}></Lock>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+                {state.errors.message && (
+                  <Typography variant="body2" className={classes.customError}>
+                    {state.errors.message}
+                  </Typography>
+                )}
+                <Button
                   color="rose"
+                  variant="contained"
+                  onClick={e => handleLogin(e)}
+                  className={classes.button}
+                  block
                 >
-                  <h4 className={classes.cardTitle}>Log in</h4>
-                  <div className={classes.socialLine}>
-                    {[
-                      "fab fa-facebook-square",
-                      "fab fa-twitter",
-                      "fab fa-google-plus"
-                    ].map((prop, key) => {
-                      return (
-                        <Button
-                          color="transparent"
-                          justIcon
-                          key={key}
-                          className={classes.customButtonClass}
-                        >
-                          <i className={prop} />
-                        </Button>
-                      );
-                    })}
-                  </div>
-                </CardHeader>
-                <CardBody>
-                  <TextField
-                    id="userHandle"
-                    name="userHandle"
-                    type="text"
-                    label="Username"
-                    fullWidth
-                    className={classes.textField}
-                    helperText={state.errors.userHandle}
-                    error={state.errors.userHandle ? true : false}
-                    value={userHandle}
-                    onChange={e => {
-                      setUserHandle(e.target.value);
-                    }}
-                  />
-                  <TextField
-                    id="email"
-                    name="email"
-                    type="email"
-                    label="Email"
-                    className={classes.textField}
-                    helperText={state.errors.email}
-                    error={state.errors.email ? true : false}
-                    value={email}
-                    onChange={e => {
-                      setEmail(e.target.value);
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Email className={classes.inputAdornmentIcon} />
-                        </InputAdornment>
-                      )
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    id="password"
-                    name="password"
-                    type="password"
-                    label="Password"
-                    fullWidth
-                    className={classes.textField}
-                    helperText={state.errors.password}
-                    error={state.errors.password ? true : false}
-                    value={password}
-                    onChange={e => {
-                      setPassword(e.target.value);
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Lock className={classes.inputAdornmentIcon}></Lock>
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                  <TextField
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    label="Confirm password"
-                    fullWidth
-                    className={classes.textField}
-                    helperText={state.errors.confirmPassword}
-                    error={state.errors.confirmPassword ? true : false}
-                    value={confirmPassword}
-                    onChange={e => {
-                      setConfirmPassword(e.target.value);
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Lock className={classes.inputAdornmentIcon}></Lock>
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                  {state.errors.message && (
-                    <Typography variant="body2" className={classes.customError}>
-                      {state.errors.message}
-                    </Typography>
+                  Register
+                  {state.UI.loading && (
+                    <CircularProgress className={classes.progress} />
                   )}
-                  <Button
-                    color="rose"
-                    variant="contained"
-                    onClick={e => handleLogin(e)}
-                    className={classes.button}
-                    block
-                  >
-                    Register
-                    {state.UI.loading && (
-                      <CircularProgress className={classes.progress} />
-                    )}
-                  </Button>
-                  <br />
-                  <small>
-                    <Link to="/auth/login">Already registered? </Link>
-                  </small>
-                </CardBody>
-              </Card>
-            </form>
-          </GridItem>
-        </GridContainer>
-      </div>
+                </Button>
+                <br />
+                <small>
+                  <Link to="/auth/login">Already registered? </Link>
+                </small>
+              </CardBody>
+            </Card>
+          </form>
+        </GridItem>
+      </GridContainer>
+    </div>
   );
 }

@@ -29,7 +29,6 @@ import CardHeader from "../../components/Card/CardHeader.js";
 // CSS and style
 import styles from "../../assets/jss/material-dashboard-pro-react/views/loginPageStyle.js";
 import customStyles from "../../assets/jss/customStyles";
-import lock from "../../assets/pictures/lock.jpeg";
 
 const useStyles = makeStyles(theme => {
   return {

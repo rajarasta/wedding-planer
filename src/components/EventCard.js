@@ -130,7 +130,7 @@ export default function EventCard(props) {
           color="secondary"
           className={classes.button}
           onClick={() => {
-            history.push(`/home-dashboard/event/${slug}`); //Changed push link for top level layout logic
+            history.push(`/dashboard/event/${slug}`); //Changed push link for top level layout logic
           }}
         >
           Edit
