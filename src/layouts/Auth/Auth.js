@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -8,7 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AuthNavbar from "../../components/Navbars/AuthNavbar.js";
 import Footer from "../../components/Footer/Footer.js";
 
-import routes from "../../routes";
+import routes from "../../routes.js";
 
 import styles from "../../assets/jss/material-dashboard-pro-react/layouts/authStyle.js";
 
@@ -17,11 +17,10 @@ import login from "../../assets/img/login.jpeg";
 import lock from "../../assets/img/lock.jpeg";
 import error from "../../assets/img/clint-mckoy.jpg";
 import pricing from "../../assets/img/bg-pricing.jpeg";
-import HomeDashboard from "../HomeDashboard/HomeDashboard.js";
 
 const useStyles = makeStyles(styles);
 
-export default function Pages(props) {
+function Pages(props) {
   const { ...rest } = props;
   // ref for the wrapper div
   const wrapper = React.createRef();
@@ -34,13 +33,12 @@ export default function Pages(props) {
   });
   const getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.collapse) {
-        return getRoutes(prop.views);
-      }
       if (prop.layout === "/auth") {
-        console.log(prop.path)
+        console.log(prop.layout + prop.path);
+        console.log("ode");
         return (
           <Route
+            exact={prop.exact}
             path={prop.layout + prop.path}
             component={prop.component}
             key={key}
@@ -52,9 +50,9 @@ export default function Pages(props) {
     });
   };
   const getBgImage = () => {
-    if (window.location.pathname.indexOf("/auth/signup") !== -1) {
+    if (window.location.pathname.indexOf("/auth/register-page") !== -1) {
       return register;
-    } else if (window.location.pathname.indexOf("/auth/login-page") !== -1) {
+    } else if (window.location.pathname.indexOf("/auth") !== -1) {
       return login;
     } else if (window.location.pathname.indexOf("/auth/pricing-page") !== -1) {
       return pricing;
@@ -95,7 +93,7 @@ export default function Pages(props) {
         >
           <Switch>
             {getRoutes(routes)}
-            <Redirect from="/" to="/auth/login-page" />
+            <Redirect from="/auth" to="auth/login" />
           </Switch>
           <Footer white />
         </div>
@@ -103,3 +101,5 @@ export default function Pages(props) {
     </div>
   );
 }
+
+export default withRouter(Pages)

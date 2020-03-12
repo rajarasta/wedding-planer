@@ -1,7 +1,7 @@
 import React from "react";
 
 // Router stuff
-import { useHistory } from "react-router-dom";
+import { useHistory, withRouter } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -82,11 +82,11 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-export default function EventCard(props) {
+function EventCard(props) {
   // Styles
   const classes = useStyles();
   // Router
-  const history = useHistory();
+  //const history = useHistory();
 
   // Props
   const {
@@ -123,7 +123,8 @@ export default function EventCard(props) {
           variant="contained"
           color="secondary"
           onClick={() => {
-            history.push(`/event/${slug}`);
+            console.log(props.match)
+            props.history.push(`/home-dashboard/event/${slug}`);
           }}
         >
           Edit
@@ -132,3 +133,5 @@ export default function EventCard(props) {
     </Card>
   );
 }
+
+export default withRouter(EventCard);

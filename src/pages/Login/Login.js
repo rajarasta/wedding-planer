@@ -73,104 +73,104 @@ export default function Login({ history }) {
 
   // Return
   return (
-      <div className={classes.container}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={6} md={4}>
-            <form>
-              <Card login className={classes[cardAnimaton]}>
-                <CardHeader
-                  className={`${classes.cardHeader} ${classes.textCenter}`}
+    <div className={classes.container}>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={6} md={4}>
+          <form>
+            <Card login className={classes[cardAnimaton]}>
+              <CardHeader
+                className={`${classes.cardHeader} ${classes.textCenter}`}
+                color="rose"
+              >
+                <h4 className={classes.cardTitle}>Log in</h4>
+                <div className={classes.socialLine}>
+                  {[
+                    "fab fa-facebook-square",
+                    "fab fa-twitter",
+                    "fab fa-google-plus"
+                  ].map((prop, key) => {
+                    return (
+                      <Button
+                        color="transparent"
+                        justIcon
+                        key={key}
+                        className={classes.customButtonClass}
+                      >
+                        <i className={prop} />
+                      </Button>
+                    );
+                  })}
+                </div>
+              </CardHeader>
+              <CardBody>
+                <TextField
+                  id="email"
+                  name="email"
+                  type="email"
+                  label="Email"
+                  className={classes.textField}
+                  helperText={state.errors.email}
+                  error={state.errors.email ? true : false}
+                  value={email}
+                  onChange={e => {
+                    setEmail(e.target.value);
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Email className={classes.inputAdornmentIcon} />
+                      </InputAdornment>
+                    )
+                  }}
+                  fullWidth
+                />
+                <TextField
+                  id="password"
+                  name="password"
+                  type="password"
+                  label="Password"
+                  className={classes.textField}
+                  helperText={state.errors.password}
+                  error={state.errors.password ? true : false}
+                  value={password}
+                  onChange={e => {
+                    setPassword(e.target.value);
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Lock className={classes.inputAdornmentIcon}></Lock>
+                      </InputAdornment>
+                    )
+                  }}
+                  fullWidth
+                />
+                {state.errors.message && (
+                  <Typography variant="body2" className={classes.customError}>
+                    {state.errors.message}
+                  </Typography>
+                )}
+                <Button
                   color="rose"
+                  variant="contained"
+                  onClick={e => handleLogin(e)}
+                  className={classes.button}
+                  block
                 >
-                  <h4 className={classes.cardTitle}>Log in</h4>
-                  <div className={classes.socialLine}>
-                    {[
-                      "fab fa-facebook-square",
-                      "fab fa-twitter",
-                      "fab fa-google-plus"
-                    ].map((prop, key) => {
-                      return (
-                        <Button
-                          color="transparent"
-                          justIcon
-                          key={key}
-                          className={classes.customButtonClass}
-                        >
-                          <i className={prop} />
-                        </Button>
-                      );
-                    })}
-                  </div>
-                </CardHeader>
-                <CardBody>
-                  <TextField
-                    id="email"
-                    name="email"
-                    type="email"
-                    label="Email"
-                    className={classes.textField}
-                    helperText={state.errors.email}
-                    error={state.errors.email ? true : false}
-                    value={email}
-                    onChange={e => {
-                      setEmail(e.target.value);
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Email className={classes.inputAdornmentIcon} />
-                        </InputAdornment>
-                      )
-                    }}
-                    fullWidth
-                  />
-                  <TextField
-                    id="password"
-                    name="password"
-                    type="password"
-                    label="Password"
-                    className={classes.textField}
-                    helperText={state.errors.password}
-                    error={state.errors.password ? true : false}
-                    value={password}
-                    onChange={e => {
-                      setPassword(e.target.value);
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Lock className={classes.inputAdornmentIcon}></Lock>
-                        </InputAdornment>
-                      )
-                    }}
-                    fullWidth
-                  />
-                  {state.errors.message && (
-                    <Typography variant="body2" className={classes.customError}>
-                      {state.errors.message}
-                    </Typography>
+                  Log In
+                  {state.UI.loading && (
+                    <CircularProgress className={classes.progress} />
                   )}
-                  <Button
-                    color="rose"
-                    variant="contained"
-                    onClick={e => handleLogin(e)}
-                    className={classes.button}
-                    block
-                  >
-                    Log In
-                    {state.UI.loading && (
-                      <CircularProgress className={classes.progress} />
-                    )}
-                  </Button>
-                  <br />
-                  <small>
-                    <Link to="/auth/signup">Don't have an account? </Link>
-                  </small>
-                </CardBody>
-              </Card>
-            </form>
-          </GridItem>
-        </GridContainer>
-      </div>
+                </Button>
+                <br />
+                <small>
+                  <Link to="/auth/signup">Don't have an account? </Link>
+                </small>
+              </CardBody>
+            </Card>
+          </form>
+        </GridItem>
+      </GridContainer>
+    </div>
   );
 }

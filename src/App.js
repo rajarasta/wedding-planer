@@ -1,8 +1,8 @@
-/**ver 0.1 Josip Rastočić
- * - changed starting app position to auth layout
- * - added top level layout
- * - pruned imports
+/*
+ver 0.1 
 - removed unnecessary imports, refactored main App component to functional one just for simple space reasons
+ver 0.2
+- organized top level logic for layouts
 
 TODO:
 - Remove <div> from App component, pass className and styles to the layouts? Additional check up needed
@@ -19,15 +19,18 @@ import { SET_AUTHENTICATED } from "./redux/types";
 import { logoutUser, getUserData } from "./redux/actions/userActions";
 
 //Router
-import { BrowserRouter, Router } from "react-router-dom";
+import {
+  BrowserRouter,
+  Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
+import { createBrowserHistory } from "history";
 
 // Pages and routes
 import HomeDashboard from "./layouts/HomeDashboard/HomeDashboard.js";
 import Auth from "./layouts/Auth/Auth.js";
-
-//React Router for page navigation imports
-import { Switch, Route, Redirect } from "react-router-dom";
-import { createBrowserHistory } from "history";
 
 // Authentication
 import axios from "axios";
@@ -46,26 +49,22 @@ if (token) {
   }
 }
 // End of Authentication
-
 const hist = createBrowserHistory();
 //TODO: correct back to what it was after timeline was solved
-function App() {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <div className="App">
-          <Router history={hist}>
-            <Switch>
-              <Route path="/auth" component={Auth} />
-              <Route path="/home-dashboard" component={HomeDashboard} />
-              <Redirect from="/" to="/auth/login-page" />
-              <Redirect from="/home-dashboard" to="/home-dashboard/home-page" />
-            </Switch>
-          </Router>
-        </div>
-      </BrowserRouter>
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <div className="App">
+        <Router history={hist}>
+          <Switch>
+            <Route path="/auth" component={Auth} />
+            <Route path="/home-dashboard" component={HomeDashboard} />
+            <Redirect from="/" to="/auth/login" />
+          </Switch>
+        </Router>
+      </div>
+    </BrowserRouter>
+  </Provider>
+);
 
 export default App;

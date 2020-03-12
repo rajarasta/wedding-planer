@@ -103,10 +103,11 @@ function HomeDashboard(props) {
   const getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/home-dashboard") {
+        console.log(prop.layout + prop.path)
         return (
           <Route
             exact={prop.exact}
-            path={prop.path}
+            path={prop.layout + prop.path}
             component={prop.component}
             key={key}
           />
@@ -128,8 +129,8 @@ function HomeDashboard(props) {
         <div className={classes.content}>
           <div className={classes.container}>
             <Switch>
-              {getRoutes(routes)}/>
-              <Redirect from="/home-dashboard" to="/home-dashboard/home-page" />
+              {getRoutes(routes)}
+              <Redirect from="/home-dashboard" to="/home-dashboard/home"/>
             </Switch>
           </div>
         </div>

@@ -9,9 +9,8 @@ ver 0.2 Igor Pavlović
 
 
 TODO: Routes ver 0.2 - solve login and register logic in single separate layout
--changed layout for login and register to /auth for top level layoutlogic
-
 TODO: Routes ver 0.3 - solve invitaion with :invitationID
+
 
 */
 /* 
@@ -108,12 +107,12 @@ var routes = [
     layout: "/home-dashboard"
   },
   {
-    exact: true,
+    exact: false,
     path: "/signup",
     name: "Signup",
     icon: Image,
     component: Signup,
-    layout: "/home-dashboard"
+    layout: "/auth"
   },
   {
     exact: true,
@@ -121,7 +120,7 @@ var routes = [
     name: "Login",
     icon: Image,
     component: Login,
-    layout: "/home-dashboard"
+    layout: "/auth"
   },
   // Ovaj path mora uvijek biti zadnji ili mora biti "exact path", inače će sjebati sve routove iza sebe -> svi URLovi se mogu matchati na http://localhost:3000/*
   {
@@ -130,7 +129,7 @@ var routes = [
     name: "Login",
     icon: Image,
     component: Login,
-    layout: "/home-dashboard"
+    layout: "/auth"
   }
 ];
 
