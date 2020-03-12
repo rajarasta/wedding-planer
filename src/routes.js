@@ -4,7 +4,7 @@
 
 
 TODO: Routes ver 0.2 - solve login and register logic in single separate layout
--changed layout for login and register to /auth
+-changed layout for login and register to /auth for top level layoutlogic
 
 TODO: Routes ver 0.3 - solve invitaion with :invitationID
 

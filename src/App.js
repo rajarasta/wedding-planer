@@ -1,6 +1,7 @@
 /**ver 0.1 Josip Rastočić
  * - changed starting app position to auth layout
- *
+ * - added top level layout
+ * - pruned imports
  */
 
 import React from "react";
