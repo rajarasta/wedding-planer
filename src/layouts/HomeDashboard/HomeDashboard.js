@@ -1,33 +1,37 @@
+/*
+v.0.1.
+- getRoutes updated with additional prop of "exact = true|false"
+*/
 import React from "react";
 import cx from "classnames";
-import { Switch, Route, Redirect } from "react-router-dom";
-// creates a beautiful scrollbar
-import PerfectScrollbar from "perfect-scrollbar";
-import "perfect-scrollbar/css/perfect-scrollbar.css";
-
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-
-// core components
-import styles from "../../assets/jss/material-dashboard-pro-react/layouts/adminStyle";
-
-import AdminNavbar from "../../components/Navbars/AdminNavbar.js";
-import Footer from "../../components/Footer/Footer.js";
-import FixedPlugin from "../../components/FixedPlugin/FixedPlugin.js";
-
-//Router
-import { withRouter } from "react-router-dom";
-
-//Routes
-import routes from "../../routes";
 
 //Redux
 import { connect } from "react-redux";
 import { setTestValue } from "../../redux/redux-test/redux-test.actions";
 
-var ps;
+// Routes
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import routes from "../../routes";
+
+// Components
+import AdminNavbar from "../../components/Navbars/AdminNavbar";
+import AdminNavbarLinks from "../../components/Navbars/AdminNavbarLinks";
+import Footer from "../../components/Footer/Footer";
+import FixedPlugin from "../../components/FixedPlugin/FixedPlugin";
+
+// Scrollbar
+import PerfectScrollbar from "perfect-scrollbar";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
+
+// MUI stuff
+import { makeStyles } from "@material-ui/core/styles";
+
+// CSS and style
+import styles from "../../assets/jss/material-dashboard-pro-react/layouts/adminStyle";
 
 const useStyles = makeStyles(styles);
+
+var ps;
 
 function HomeDashboard(props) {
   const { setTestValue, ...rest } = props;
@@ -87,9 +91,7 @@ function HomeDashboard(props) {
           return collapseActiveRoute;
         }
       } else {
-        if (
-          window.location.href.indexOf(routes[i].path) !== -1
-        ) {
+        if (window.location.href.indexOf(routes[i].path) !== -1) {
           return routes[i].name;
         }
       }
@@ -97,11 +99,18 @@ function HomeDashboard(props) {
     return activeRoute;
   };
 
+  // Refactored getRoutes to have "exact" prop as well (true|false), this will be important with parametric URLs
   const getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/home-dashboard") {
-        console.log(prop.path);
-        return <Route path={prop.path} component={prop.component} key={key} />;
+        return (
+          <Route
+            exact={prop.exact}
+            path={prop.path}
+            component={prop.component}
+            key={key}
+          />
+        );
       } else {
         return null;
       }
@@ -123,7 +132,6 @@ function HomeDashboard(props) {
               <Redirect from="/admin" to="/admin/dashboard" />
             </Switch>
           </div>
-          
         </div>
         <Footer fluid />
       </div>

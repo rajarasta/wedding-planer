@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
-// Redux stuff
-import { useSelector, useDispatch } from "react-redux";
+// Router stuff
+import { useHistory } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,8 +10,7 @@ import {
   Button,
   Card,
   CardContent,
-  CardMedia,
-  CircularProgress
+  CardMedia
 } from "@material-ui/core";
 
 // CSS and style
@@ -86,8 +85,11 @@ const useStyles = makeStyles(theme => {
 export default function EventCard(props) {
   // Styles
   const classes = useStyles();
+  // Router
+  const history = useHistory();
+
+  // Props
   const {
-    eventId,
     name,
     slug,
     type,
@@ -95,7 +97,6 @@ export default function EventCard(props) {
     confirmedGuests,
     createdAt
   } = props.event;
-  const { history } = props;
 
   return (
     <Card profile>
@@ -122,7 +123,7 @@ export default function EventCard(props) {
           variant="contained"
           color="secondary"
           onClick={() => {
-            history.push("/dashboard");
+            history.push(`/event/${slug}`);
           }}
         >
           Edit

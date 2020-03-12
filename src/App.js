@@ -1,3 +1,11 @@
+/*
+ver 0.1 
+- removed unnecessary imports, refactored main App component to functional one just for simple space reasons
+
+TODO:
+- Remove <div> from App component, pass className and styles to the layouts? Additional check up needed
+
+*/
 import React from "react";
 import "./App.css";
 import "../src/assets/scss/material-dashboard-pro-react.scss?v=1.8.0";
@@ -12,18 +20,7 @@ import { logoutUser, getUserData } from "./redux/actions/userActions";
 import { BrowserRouter } from "react-router-dom";
 
 // Pages and routes
-import HomePage from "./pages/home-page.component";
-import WeddingPage from "./pages/wedding-page/wedding-page.component";
-import Login from "./pages/login/login.component";
-import Signup from "./pages/signup/signup.component";
-import Dashboard from "./pages/dashboard-page/dashboard.component";
-import Guests from "./pages/guests/guests.components";
-import AddGuestPage from "./pages/add-guest-page/add-guest-page.components";
-import TimelinePage from "./pages/TimelinePage/TimelinePage.js";
 import HomeDashboard from "./layouts/HomeDashboard/HomeDashboard.js";
-
-//React Router for page navigation imports
-import { Switch, Route, Redirect } from "react-router-dom";
 
 // Authentication
 import axios from "axios";
@@ -44,16 +41,14 @@ if (token) {
 // End of Authentication
 
 //TODO: correct back to what it was after timeline was solved
-function App() {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <div className="App">
-          <HomeDashboard />
-        </div>
-      </BrowserRouter>
-    </Provider>
-  );
-}
+const App = () => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <div className="App">
+        <HomeDashboard />
+      </div>
+    </BrowserRouter>
+  </Provider>
+);
 
 export default App;

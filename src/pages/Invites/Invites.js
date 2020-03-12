@@ -2,15 +2,15 @@ import React from "react";
 
 import { Route } from "react-router-dom";
 
-import TimelinePage from "../TimelinePage/TimelinePage";
+import TimelinePage from "../Timeline/Timeline";
 
-const InviteOverviewPage = ({ match }) => {
+const Invites = ({ match }) => {
   return (
     <div className="timeline-overview-page">
       <Route exact path={`${match.path}`} component={TimelinePage} />
-      <Route path={`${match.path}/:inviteID`} component={TimelinePage}/>
+      <Route path={`${match.path}/:inviteID`} component={TimelinePage} />
     </div>
   );
 };
 
-export default InviteOverviewPage;
+export default Invites;

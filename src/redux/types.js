@@ -9,4 +9,8 @@ export const SET_ERRORS = "SET_ERRORS";
 export const LOADING_UI = "LOADING_UI";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 
+// Event reducer types
+export const SET_EVENT = "SET_EVENT";
+export const SET_GUESTS = "SET_GUESTS";
+
 // Data reducer types

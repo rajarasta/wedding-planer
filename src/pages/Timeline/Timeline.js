@@ -1,18 +1,22 @@
+/*
+v.0.1
+Renamed the component
+*/
+
 import React from "react";
 
 // core components
-import GridContainer from "../../components/Grid/GridContainer.js";
-import GridItem from "../../components/Grid/GridItem.js";
-import Heading from "../../components/Heading/Heading.js";
-import Timeline from "../../components/Timeline/Timeline.js";
-import Card from "../../components/Card/Card.js";
-import CardBody from "../../components/Card/CardBody.js";
-import SectionHeaders from "../../components/SectionHeaders/SectionHeaders.js";
-import RsvpInvitationSection from "../../components/RsvpInvitationSection/RsvpInvitationSection.js";
+import GridContainer from "../../components/Grid/GridContainer";
+import GridItem from "../../components/Grid/GridItem";
+import TimelineUI from "../../components/Timeline/Timeline";
+import Card from "../../components/Card/Card";
+import CardBody from "../../components/Card/CardBody";
+import SectionHeaders from "../../components/SectionHeaders/SectionHeaders";
+import RsvpInvitationSection from "../../components/RsvpInvitationSection/RsvpInvitationSection";
 
 import { stories } from "../../assets/variables/general";
 
-function TimelinePage({ match }) {
+export default function Timeline({ match }) {
   return (
     <div>
       <SectionHeaders />
@@ -20,7 +24,7 @@ function TimelinePage({ match }) {
         <GridItem xs={12}>
           <Card plain>
             <CardBody plain>
-              <Timeline stories={stories} />
+              <TimelineUI stories={stories} />
             </CardBody>
           </Card>
         </GridItem>
@@ -41,5 +45,3 @@ function TimelinePage({ match }) {
     </div>
   );
 }
-
-export default TimelinePage;

@@ -40,7 +40,7 @@ const useStyles = makeStyles(theme => {
 
 // COMPONENT
 
-function Signup({ history }) {
+export default function Signup({ history }) {
   // Styles
   const classes = useStyles();
   setTimeout(function() {
@@ -223,5 +223,3 @@ function Signup({ history }) {
     </div>
   );
 }
-
-export default withRouter(Signup);

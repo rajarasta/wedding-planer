@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/userActions";
 
 // Router stuff
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-function Login({ history }) {
+export default function Login({ history }) {
   // Styles
   const classes = useStyles();
   setTimeout(function() {
@@ -183,5 +183,3 @@ function Login({ history }) {
     </div>
   );
 }
-
-export default withRouter(Login);
