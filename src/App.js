@@ -2,8 +2,12 @@
  * - changed starting app position to auth layout
  * - added top level layout
  * - pruned imports
- */
+- removed unnecessary imports, refactored main App component to functional one just for simple space reasons
 
+TODO:
+- Remove <div> from App component, pass className and styles to the layouts? Additional check up needed
+
+*/
 import React from "react";
 import "./App.css";
 import "../src/assets/scss/material-dashboard-pro-react.scss?v=1.8.0";

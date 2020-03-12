@@ -3,37 +3,32 @@ import React, { useState } from "react";
 // Redux stuff
 import { useSelector, useDispatch } from "react-redux";
 
-// Router stuff
-import { withRouter } from "react-router-dom";
-
 // Main components
-import EventCard from "../components/EventCard";
+import EventCard from "../../components/EventCard";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
-import Icon from "@material-ui/core/Icon";
 
 // MUI icons
-import Home from "@material-ui/icons/Home";
 
 // Theme components
-import GridContainer from "../components/Grid/GridContainer.js";
-import GridItem from "../components/Grid/GridItem.js";
-import Card from "../components/Card/Card.js";
-import CardBody from "../components/Card/CardBody.js";
-import Button from "../components/CustomButtons/Button.js";
-import CardAvatar from "../components/Card/CardAvatar";
+import GridContainer from "../../components/Grid/GridContainer.js";
+import GridItem from "../../components/Grid/GridItem.js";
+import Card from "../../components/Card/Card.js";
+import CardBody from "../../components/Card/CardBody.js";
+import Button from "../../components/CustomButtons/Button.js";
+import CardAvatar from "../../components/Card/CardAvatar";
 
 // Images
-import background from "../assets/pictures/backround.jpg";
-import avatar from "../assets/pictures/mirna_i_antonio.jpg";
+import background from "../../assets/pictures/backround.jpg";
+import avatar from "../../assets/pictures/mirna_i_antonio.jpg";
 
 // CSS and style
 import {
   cardTitle,
   roseColor
-} from "../assets/jss/material-dashboard-pro-react.js";
-import customStyles from "../assets/jss/customStyles";
+} from "../../assets/jss/material-dashboard-pro-react.js";
+import customStyles from "../../assets/jss/customStyles";
 
 const styles = {
   cardTitle,
@@ -102,7 +97,7 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-function HomePage({ history }) {
+export default function Home({ history }) {
   // Styles
   const classes = useStyles();
 
@@ -156,5 +151,3 @@ function HomePage({ history }) {
     </GridContainer>
   );
 }
-
-export default withRouter(HomePage);

@@ -1,17 +1,25 @@
+/*
+v.0.1
+Nije potrebno withRouter() exportanje s obzirom da nije dio komponente koja je fiksni dio UI-a
+https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
+
+- added useHistory 
+- edited Guest tab/links to correct URLs
+- organized the file
+
+*/
+
 import React from "react";
 
-// @material-ui/core components
+// Router stuff
+import { useHistory, Link } from "react-router-dom";
+
+// MUI stuff
 import { makeStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
+import { Typography, Tooltip } from "@material-ui/core";
+import { Refresh, Edit, ArtTrack } from "@material-ui/icons";
 
-// @material-ui/icons
-// import ContentCopy from "@material-ui/icons/ContentCopy";
-// import InfoOutline from "@material-ui/icons/InfoOutline";
-import Refresh from "@material-ui/icons/Refresh";
-import Edit from "@material-ui/icons/Edit";
-import ArtTrack from "@material-ui/icons/ArtTrack";
-
-// core components
+// Components
 import GridContainer from "../../components/Grid/GridContainer.js";
 import GridItem from "../../components/Grid/GridItem.js";
 import Button from "../../components/CustomButtons/Button.js";
@@ -20,18 +28,19 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 
-import styles from "../../assets/jss/material-dashboard-pro-react/views/dashboardStyle.js";
-
+// Images and assets
 import weddingTable from "../../assets/pictures/wedding-table5.jpg";
 import weddingChurch from "../../assets/pictures/wedding-church.jpg";
 import weddingAccomodation from "../../assets/pictures/wedding-accomodation.jpg";
 
-import { withRouter } from "react-router-dom";
-
+// Styles
+import styles from "../../assets/jss/material-dashboard-pro-react/views/dashboardStyle.js";
 const useStyles = makeStyles(styles);
 
-function Dashboard({ history }) {
+export default function Dashboard(props) {
   const classes = useStyles();
+  const history = useHistory();
+  // COMPONENT
   return (
     <div>
       <h3>Manage Listings</h3>
@@ -40,14 +49,9 @@ function Dashboard({ history }) {
         <GridItem xs={12} sm={12} md={4}>
           <Card product className={classes.cardHover}>
             <CardHeader image className={classes.cardHeaderHover}>
-              <a
-                href="#pablo"
-                onClick={() => {
-                  history.push("guests");
-                }}
-              >
+              <Link to={`${history.location.pathname}/guests`}>
                 <img src={weddingTable} alt="..." />
-              </a>
+              </Link>
             </CardHeader>
             <CardBody>
               <div className={classes.cardHoverUnder}>
@@ -82,15 +86,18 @@ function Dashboard({ history }) {
                   </Button>
                 </Tooltip>
               </div>
-              <h4 className={classes.cardProductTitle}>
-                <a href="#pablo" onClick={e => e.preventDefault()}>
+              <Link to={`${history.location.pathname}/guests`}>
+                <Typography variant="h4" className={classes.cardProductTitle}>
                   Guests
-                </a>
-              </h4>
-              <p className={classes.cardProductDesciprion}>
+                </Typography>
+              </Link>
+              <Typography
+                variant="body"
+                className={classes.cardProductDesciprion}
+              >
                 Manage all the people that will be the there on your special
                 day.
-              </p>
+              </Typography>
             </CardBody>
             <CardFooter product>FOOTER</CardFooter>
           </Card>
@@ -204,5 +211,3 @@ function Dashboard({ history }) {
     </div>
   );
 }
-
-export default withRouter(Dashboard);

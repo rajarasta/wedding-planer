@@ -1,6 +1,11 @@
-/*Routes ver 0.1 Josip Rastočić
+/*
+Routes ver 0.1 Josip Rastočić
 -started adding routes logic
 -all routes take same icon
+
+ver 0.2 Igor Pavlović
+- renamed page components to more readable names
+- adjusted routes accordingly
 
 
 TODO: Routes ver 0.2 - solve login and register logic in single separate layout
@@ -17,36 +22,40 @@ TODO: solve index.js and app.js so different layouts are for authentication vs l
 */
 
 //home-dashboard layout
-import HomePage from "./pages/home-page.component";  //added
-import WeddingPage from "./pages/wedding-page/wedding-page.component"; //added
-import Dashboard from "./pages/dashboard-page/dashboard.component"; //added
-import Guests from "./pages/guests/guests.components"; //added
-import AddGuestPage from "./pages/add-guest-page/add-guest-page.components"; //added
-import InviteOverviewPage from "./pages/InviteOverviewPage/InviteOverviewPage";  //added
+import Home from "./pages/Home/Home"; //added
+import Wedding from "./pages/Wedding/Wedding"; //added
+import Dashboard from "./pages/Dashboard/Dashboard"; //added
+import Guests from "./pages/Guests/Guests"; //added
+import AddGuest from "./pages/AddGuest/AddGuest"; //added
+import AddEvent from "./pages/AddEvent/AddEvent"; //added
+import Invites from "./pages/Invites/Invites"; //added
 
 //Auth layout
-import Login from "./pages/login/login.component"; //added
-import Signup from "./pages/signup/signup.component"; //added
+import Login from "./pages/Login/Login"; //added
+import Signup from "./pages/Signup/Signup"; //added
 
 // @material-ui/icons
 import Image from "@material-ui/icons/Image";
 
 var routes = [
   {
-    path: "/home-page",
+    exact: true,
+    path: "/home",
     name: "Home",
     icon: Image,
-    component: HomePage,
+    component: Home,
     layout: "/home-dashboard"
   },
   {
-    path: "/wedding-page",
+    exact: true,
+    path: "/wedding",
     name: "Wedding",
     icon: Image,
-    component: WeddingPage,
+    component: Wedding,
     layout: "/home-dashboard"
   },
   {
+    exact: true,
     path: "/dashboard",
     name: "Dashboard",
     icon: Image,
@@ -54,41 +63,75 @@ var routes = [
     layout: "/home-dashboard"
   },
   {
-    path: "/guests",
+    exact: true,
+    path: "/event/add",
+    name: "Add Event",
+    icon: Image,
+    component: AddEvent,
+    layout: "/home-dashboard"
+  },
+  {
+    exact: true,
+    path: "/event/:eventId/guests",
     name: "Guests",
     icon: Image,
     component: Guests,
     layout: "/home-dashboard"
   },
   {
-    path: "/add-guest-page",
+    exact: true,
+    // Adjusted route since guests are added to specific events
+    path: "/event/:eventId/add_guest",
     name: "Add Guest",
     icon: Image,
-    component: AddGuestPage,
+    component: AddGuest,
     layout: "/home-dashboard"
   },
   {
-    path: "/invite-overview-page",
-    name: "Invite",
+    // Has to be last in the "event" tree of routes
+    // Must be false to pick up all routes for this event as a fallback
+    exact: false,
+    // Fallback to main event dashboard
+    // TODO Make event dashboard or add apropriate component
+    path: "/event/:eventId/",
+    name: "Event Dashboard",
     icon: Image,
-    component: InviteOverviewPage,
+    component: Dashboard,
     layout: "/home-dashboard"
   },
   {
-    path: "/login-page",
-    name: "Login",
+    exact: true,
+    path: "/invites",
+    name: "Invites",
     icon: Image,
-    component: Login,
-    layout: "/auth"
+    component: Invites,
+    layout: "/home-dashboard"
   },
   {
+    exact: true,
     path: "/signup",
     name: "Signup",
     icon: Image,
     component: Signup,
-    layout: "/auth"
+    layout: "/home-dashboard"
+  },
+  {
+    exact: true,
+    path: "/login",
+    name: "Login",
+    icon: Image,
+    component: Login,
+    layout: "/home-dashboard"
+  },
+  // Ovaj path mora uvijek biti zadnji ili mora biti "exact path", inače će sjebati sve routove iza sebe -> svi URLovi se mogu matchati na http://localhost:3000/*
+  {
+    exact: true,
+    path: "/",
+    name: "Login",
+    icon: Image,
+    component: Login,
+    layout: "/home-dashboard"
   }
-
 ];
 
 export default routes;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 // Redux stuff
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../../redux/actions/userActions";
+import { signupUser } from "../../redux/actions/userActions";
 
 // Router stuff
 import { withRouter, Link } from "react-router-dom";
@@ -39,7 +39,8 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-function Login({ history }) {
+
+export default function Signup({ history }) {
   // Styles
   const classes = useStyles();
   setTimeout(function() {
@@ -59,16 +60,20 @@ function Login({ history }) {
 
   // Local state
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
+  const [userHandle, setUserHandle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   function handleLogin(event) {
     event.preventDefault();
-    const userData = {
+    const newUserData = {
+      userHandle: userHandle,
       email: email,
-      password: password
+      password: password,
+      confirmPassword: confirmPassword
     };
-    dispatch(loginUser(userData, history));
+    dispatch(signupUser(newUserData, history));
   }
 
   // Return
@@ -104,6 +109,20 @@ function Login({ history }) {
                 </CardHeader>
                 <CardBody>
                   <TextField
+                    id="userHandle"
+                    name="userHandle"
+                    type="text"
+                    label="Username"
+                    fullWidth
+                    className={classes.textField}
+                    helperText={state.errors.userHandle}
+                    error={state.errors.userHandle ? true : false}
+                    value={userHandle}
+                    onChange={e => {
+                      setUserHandle(e.target.value);
+                    }}
+                  />
+                  <TextField
                     id="email"
                     name="email"
                     type="email"
@@ -129,6 +148,7 @@ function Login({ history }) {
                     name="password"
                     type="password"
                     label="Password"
+                    fullWidth
                     className={classes.textField}
                     helperText={state.errors.password}
                     error={state.errors.password ? true : false}
@@ -143,7 +163,27 @@ function Login({ history }) {
                         </InputAdornment>
                       )
                     }}
+                  />
+                  <TextField
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    label="Confirm password"
                     fullWidth
+                    className={classes.textField}
+                    helperText={state.errors.confirmPassword}
+                    error={state.errors.confirmPassword ? true : false}
+                    value={confirmPassword}
+                    onChange={e => {
+                      setConfirmPassword(e.target.value);
+                    }}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Lock className={classes.inputAdornmentIcon}></Lock>
+                        </InputAdornment>
+                      )
+                    }}
                   />
                   {state.errors.message && (
                     <Typography variant="body2" className={classes.customError}>
@@ -157,14 +197,14 @@ function Login({ history }) {
                     className={classes.button}
                     block
                   >
-                    Log In
+                    Register
                     {state.UI.loading && (
                       <CircularProgress className={classes.progress} />
                     )}
                   </Button>
                   <br />
                   <small>
-                    <Link to="/auth/signup">Don't have an account? </Link>
+                    <Link to="/auth/login">Already registered? </Link>
                   </small>
                 </CardBody>
               </Card>
@@ -174,5 +214,3 @@ function Login({ history }) {
       </div>
   );
 }
-
-export default withRouter(Login);

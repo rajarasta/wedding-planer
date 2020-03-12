@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 // Redux stuff
 import { useSelector, useDispatch } from "react-redux";
-import { signupUser } from "../../redux/actions/userActions";
+import { loginUser } from "../../redux/actions/userActions";
 
 // Router stuff
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // MUI components
 import { makeStyles } from "@material-ui/core/styles";
@@ -39,8 +39,7 @@ const useStyles = makeStyles(theme => {
 });
 
 // COMPONENT
-
-function Signup({ history }) {
+export default function Login({ history }) {
   // Styles
   const classes = useStyles();
   setTimeout(function() {
@@ -60,20 +59,16 @@ function Signup({ history }) {
 
   // Local state
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-  const [userHandle, setUserHandle] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   function handleLogin(event) {
     event.preventDefault();
-    const newUserData = {
-      userHandle: userHandle,
+    const userData = {
       email: email,
-      password: password,
-      confirmPassword: confirmPassword
+      password: password
     };
-    dispatch(signupUser(newUserData, history));
+    dispatch(loginUser(userData, history));
   }
 
   // Return
@@ -109,20 +104,6 @@ function Signup({ history }) {
                 </CardHeader>
                 <CardBody>
                   <TextField
-                    id="userHandle"
-                    name="userHandle"
-                    type="text"
-                    label="Username"
-                    fullWidth
-                    className={classes.textField}
-                    helperText={state.errors.userHandle}
-                    error={state.errors.userHandle ? true : false}
-                    value={userHandle}
-                    onChange={e => {
-                      setUserHandle(e.target.value);
-                    }}
-                  />
-                  <TextField
                     id="email"
                     name="email"
                     type="email"
@@ -148,7 +129,6 @@ function Signup({ history }) {
                     name="password"
                     type="password"
                     label="Password"
-                    fullWidth
                     className={classes.textField}
                     helperText={state.errors.password}
                     error={state.errors.password ? true : false}
@@ -163,27 +143,7 @@ function Signup({ history }) {
                         </InputAdornment>
                       )
                     }}
-                  />
-                  <TextField
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    type="password"
-                    label="Confirm password"
                     fullWidth
-                    className={classes.textField}
-                    helperText={state.errors.confirmPassword}
-                    error={state.errors.confirmPassword ? true : false}
-                    value={confirmPassword}
-                    onChange={e => {
-                      setConfirmPassword(e.target.value);
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Lock className={classes.inputAdornmentIcon}></Lock>
-                        </InputAdornment>
-                      )
-                    }}
                   />
                   {state.errors.message && (
                     <Typography variant="body2" className={classes.customError}>
@@ -197,14 +157,14 @@ function Signup({ history }) {
                     className={classes.button}
                     block
                   >
-                    Register
+                    Log In
                     {state.UI.loading && (
                       <CircularProgress className={classes.progress} />
                     )}
                   </Button>
                   <br />
                   <small>
-                    <Link to="/auth/login">Already registered? </Link>
+                    <Link to="/auth/signup">Don't have an account? </Link>
                   </small>
                 </CardBody>
               </Card>
@@ -214,5 +174,3 @@ function Signup({ history }) {
       </div>
   );
 }
-
-export default withRouter(Signup);
